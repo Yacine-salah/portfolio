@@ -2,9 +2,7 @@
 
 import React, { useState } from 'react';
 import { 
-  Server, 
-  Cloud, 
-  BarChart, 
+  Cloud,  
   CheckCircle2,
   AlertCircle,
   Lightbulb,

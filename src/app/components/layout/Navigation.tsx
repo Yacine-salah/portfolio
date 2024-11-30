@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { Home, Cpu, Briefcase, Book, FileText, Rss } from 'lucide-react';
+import { Home, Cpu, Briefcase, Book, FileText, Rss, LucideIcon } from 'lucide-react';
 import type { TabType } from '@/app/types';
 
 interface NavigationProps {
@@ -12,7 +12,7 @@ interface NavigationProps {
 interface TabItem {
   id: TabType;
   label: string;
-  icon: any; // ou LucideIcon si vous importez le type de lucide-react
+  icon: LucideIcon  ; // ou LucideIcon si vous importez le type de lucide-react
 }
 
 const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab }) => {
