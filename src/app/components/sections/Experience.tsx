@@ -193,7 +193,7 @@ const Experience = () => {
     ];
   
     // Fonction améliorée pour les gradients de couleur
-    const getCompanyClass = (company: string, index: number): string => {
+    const getCompanyClass = (company: string): string => {
         const colorMap: CompanyColors = {
           'SERVIER': 'from-blue-500 to-purple-500',
           'CARREFOUR': 'from-blue-600 to-cyan-500',
@@ -221,7 +221,7 @@ const Experience = () => {
                 
                 <ExperienceCard 
                   {...experience} 
-                  colorGradient={getCompanyClass(experience.company, index)}
+                  colorGradient={getCompanyClass(experience.company)}
                 />
               </div>
             ))}

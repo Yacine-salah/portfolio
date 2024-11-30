@@ -32,7 +32,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
   colorGradient
 }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  const [showTech, setShowTech] = useState(false);
+  //const [showTech, setShowTech] = useState(false);
 
   return (
     <div className="w-full">
