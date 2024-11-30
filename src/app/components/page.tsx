@@ -6,8 +6,8 @@ import Hero from '@/app/components/sections/Hero';
 import Skills from '@/app/components/sections/Skills';
 import Experience from '@/app/components/sections/Experience';
 import Education from '@/app/components/sections/Education';
-import CaseStudies from './components/sections/CaseStudies';
-import TechWatch from './components/sections/TechWatch';
+import CaseStudies from './sections/CaseStudies';
+import TechWatch from './sections/TechWatch';
 import type { TabType } from '@/app/types';
 
 export default function Home() {
