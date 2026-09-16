@@ -1,36 +1,45 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio de Yacine Salah
 
-## Getting Started
+Portfolio Next.js / React / TypeScript, conçu autour du corail `#fd5a4f`, d’un fond anthracite et d’un monogramme YS vectoriel.
 
-First, run the development server:
+## Démarrer
 
-```bash
+Node.js 24 et npm sont nécessaires.
+
+```sh
+npm ci
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ouvrir http://localhost:3000.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```sh
+npm run lint
+npm run typecheck
+npm run build
+npm start
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Sur un clone neuf, lancer `npm run build` avant le premier `typecheck` pour générer les types Next.js.
 
-## Learn More
+## Contenu et identité
 
-To learn more about Next.js, take a look at the following resources:
+- `src/app/components/sections/Hero.tsx` : accueil, expertise, projet, parcours et ressources.
+- `src/app/components/sections/Experience.tsx` : expériences et dates du parcours original.
+- `src/app/components/sections/CaseStudies.tsx` : étude de cas et indicateurs du site original.
+- `src/app/components/sections/Skills.tsx` : compétences et détails dépliables.
+- `src/app/data/portfolio.ts` : données de formation.
+- `src/app/components/sections/TechWatch.tsx` : sources officielles de veille, filtrables par thème.
+- `src/app/globals.css` : mise en page responsive et variables graphiques.
+- `public/brand/ys-mark.svg` : logo original YS ; utilisé aussi comme favicon.
+- `public/brand/apple-touch-icon.png` : version PNG du logo.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Les données professionnelles et les chiffres de l’étude de cas proviennent du dépôt existant ; ils n’ont pas été actualisés ou vérifiés auprès de Yacine pendant cette refonte. La veille est une sélection de liens vers les sources, sans flux automatique ni faux articles datés.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Les six rubriques utilisent des fragments d’URL (`#home`, `#skills`, `#experience`, `#case-studies`, `#education`, `#tech-watch`) et prennent en charge les liens directs et l’historique du navigateur. Le bouton de contact ouvre la messagerie du visiteur.
 
-## Deploy on Vercel
+## Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Conserver le projet GitHub/Vercel existant, le framework Next.js, la racine du dépôt et Node.js 24. La commande de build est `npm run build` et la sortie reste celle de Next.js. Aucun secret ni variable d’environnement n’est nécessaire.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+La branche de travail est `design/coral-portfolio`, basée sur le commit `04f04718c97f42ad9c916ea94ed1ca779c87e617` de `Yacine-salah/portfolio`. Une publication nécessite un accès au dépôt GitHub et au projet Vercel correspondant.

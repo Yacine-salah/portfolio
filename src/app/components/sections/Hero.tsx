@@ -1,121 +1,349 @@
-'use client';
+import Image from "next/image";
+import {
+  ArrowDown,
+  ArrowRight,
+  ArrowUpRight,
+  Award,
+  BookOpen,
+  Cloud,
+  GitBranch,
+  Layers3,
+  MapPin,
+  Network,
+  ShieldCheck,
+  Terminal,
+} from "lucide-react";
 
-import React from 'react';
-import Image from 'next/image';
-import { Mail, MapPin, Linkedin, BookOpen, Award } from 'lucide-react';
+const expertise = [
+  {
+    number: "01",
+    icon: Cloud,
+    title: "Architecture cloud",
+    text: "Des infrastructures pensées pour durer. De la migration à l’optimisation, sur GCP et OCI.",
+    tags: "GCP / OCI / TERRAFORM",
+  },
+  {
+    number: "02",
+    icon: GitBranch,
+    title: "DevOps & automatisation",
+    text: "Du code à la production, des déploiements reproductibles et des équipes qui avancent ensemble.",
+    tags: "GITLAB CI/CD / KUBERNETES / DOCKER",
+  },
+  {
+    number: "03",
+    icon: ShieldCheck,
+    title: "Fiabilité & observabilité",
+    text: "Comprendre ce qui se passe, anticiper les incidents et garder la maîtrise des environnements.",
+    tags: "GRAFANA / PYTHON / CLOUD LOGGING",
+  },
+];
 
-const Hero = () => {
+export default function Hero() {
   return (
-    <div className="relative overflow-hidden min-h-[calc(100vh-5rem)]">
-      {/* Fond avec gradient - déplacé en dessous avec un z-index négatif */}
-      <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 to-purple-600/20 -z-10" />
-      
-      <div className="container mx-auto px-4 py-20 relative z-10"> {/* Ajout de z-10 */}
-        <div className="flex flex-col md:flex-row items-center gap-12">
-          {/* Photo */}
-          <div className="md:w-1/2">
-            <div className="relative group">
-              <div className="absolute -inset-1 bg-gradient-to-r from-blue-500 via-purple-500 to-blue-500 rounded-full blur opacity-75 group-hover:opacity-100 transition duration-1000" />
-              <div className="relative w-64 h-64 rounded-full overflow-hidden border-4 border-white/10">
-                <Image
-                  src="/images/photo-profil.png"
-                  alt="Yacine SALAH - Ingénieur Cloud DevOps"
-                  fill
-                  priority
-                  className="object-cover hover:scale-110 transition-transform duration-500"
-                />
-              </div>
-            </div>
+    <>
+      <section className="hero shell" aria-labelledby="hero-title">
+        <div className="hero-copy">
+          <p className="eyebrow">
+            <span className="tiny-cross" aria-hidden="true">
+              +
+            </span>{" "}
+            INGÉNIEUR CLOUD & DEVOPS
+          </p>
+          <h1 id="hero-title">
+            Le cloud.
+            <br />
+            Le code.
+            <br />
+            <span>Le concret.</span>
+          </h1>
+          <p className="hero-description">
+            Je suis <strong>Yacine Salah.</strong> Je conçois des
+            infrastructures fiables et j’automatise ce qui peut l’être. Pour que
+            vos équipes se concentrent sur ce qui compte.
+          </p>
+          <div className="hero-actions">
+            <a href="#case-studies" className="button button-primary">
+              Explorer mes projets <ArrowUpRight size={18} />
+            </a>
+            <a href="mailto:yacine.salah77@gmail.com" className="text-link">
+              Faisons connaissance <ArrowRight size={17} />
+            </a>
           </div>
-          
-          {/* Content */}
-          <div className="md:w-1/2 space-y-8">
-            <div className="space-y-4">
-              <h1 className="text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-400">
-                Yacine SALAH 
-              </h1>
-              <h2 className="text-3xl text-blue-300">Ingénieur Cloud DevOps</h2>
-            </div>
-
-            {/* Social Links */}
-            <div className="flex flex-wrap gap-4">
-              <a 
-                href="https://www.linkedin.com/in/yacine-salah-a0bb3176/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-4 py-2 bg-[#0077B5]/10 hover:bg-[#0077B5]/20 rounded-full cursor-pointer"
-              >
-                <div className="flex items-center gap-2">
-                  <Linkedin className="w-5 h-5 text-[#0077B5]" />
-                  <span className="text-gray-300">LinkedIn</span>
-                </div>
-              </a>
-
-              <a 
-                href="https://www.cloudskillsboost.google/public_profiles/c3800e34-0c7d-44d8-9ee7-418a32cb2389"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-4 py-2 bg-blue-500/10 hover:bg-blue-500/20 rounded-full cursor-pointer"
-              >
-                <div className="flex items-center gap-2">
-                  <Award className="w-5 h-5 text-blue-400" />
-                  <span className="text-gray-300">Google Skills</span>
-                </div>
-              </a>
-
-              <a 
-                href="https://www.amazon.fr/dp/B0CGWN1PCK"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block px-4 py-2 bg-green-500/10 hover:bg-green-500/20 rounded-full cursor-pointer"
-              >
-                <div className="flex items-center gap-2">
-                  <BookOpen className="w-5 h-5 text-green-400" />
-                  <span className="text-gray-300">Mon Livre DevOps</span>
-                </div>
-              </a>
-            </div>
-
-            {/* Contact */}
-            <div className="flex flex-wrap gap-4">
-              <a
-                href="mailto:yacine.salah77@gmail.com"
-                className="inline-flex items-center gap-3 text-gray-300 hover:text-blue-400 transition-colors"
-              >
-                <Mail className="text-blue-400" />
-                yacine.salah77@gmail.com
-              </a>
-              <div className="flex items-center gap-3 text-gray-300">
-                <MapPin className="text-blue-400" />
-                91090 Lisses, France
-              </div>
-            </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-wrap gap-4 pt-4">
-              <a 
-                href="https://www.linkedin.com/in/yacine-salah-a0bb3176/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block text-center px-8 py-3 bg-gradient-to-r from-blue-500 to-purple-500 text-white rounded-full font-semibold transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-blue-500/25"
-              >
-                Me Contacter
-              </a>
-              
-              <a 
-                href="https://www.cloudskillsboost.google/public_profiles/c3800e34-0c7d-44d8-9ee7-418a32cb2389"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-block text-center px-8 py-3 bg-gray-800 hover:bg-gray-700 text-white rounded-full font-semibold transform hover:scale-105 transition-all duration-300 shadow-lg"
-              >
-                Voir mes certifications
-              </a>
-            </div>
+          <div className="hero-location">
+            <MapPin size={14} /> Lisses, Île-de-France{" "}
+            <span aria-hidden="true">/</span> Cloud · DevOps · DataOps
           </div>
         </div>
+        <div className="hero-visual">
+          <div className="portrait-stage">
+            <div className="portrait-grid" aria-hidden="true" />
+            <div className="portrait-circle" aria-hidden="true" />
+            <span className="portrait-coordinate" aria-hidden="true">
+              YS — 01
+            </span>
+            <span className="portrait-plus" aria-hidden="true">
+              +
+            </span>
+            <Image
+              className="hero-portrait"
+              src="/images/photo-profil.png"
+              alt="Yacine Salah, ingénieur Cloud et DevOps"
+              width={299}
+              height={358}
+              sizes="(max-width: 760px) 90vw, 40vw"
+              priority
+            />
+            <div className="portrait-label">
+              <span>LA TECHNIQUE AU SERVICE</span>
+              <span>DE VOS AMBITIONS.</span>
+            </div>
+          </div>
+          <div className="visual-caption">
+            <span>
+              <span className="status-dot" /> CONCEVOIR. AUTOMATISER.
+              FIABILISER.
+            </span>
+            <span aria-hidden="true">[ YS ]</span>
+          </div>
+        </div>
+        <div className="hero-bottom">
+          <span>DE L’INFRASTRUCTURE À L’IMPACT</span>
+          <button
+            className="scroll-cue"
+            onClick={() =>
+              document
+                .getElementById("expertise-preview")
+                ?.scrollIntoView({
+                  behavior: window.matchMedia(
+                    "(prefers-reduced-motion: reduce)",
+                  ).matches
+                    ? "instant"
+                    : "smooth",
+                })
+            }
+            aria-label="Découvrir mon expertise"
+          >
+            <ArrowDown size={17} />
+          </button>
+          <span>GCP / TERRAFORM / KUBERNETES</span>
+        </div>
+      </section>
+      <div className="company-strip">
+        <div className="shell company-inner">
+          <p>
+            MON PARCOURS
+            <br />
+            <span>AU SEIN DE LEURS ÉQUIPES</span>
+          </p>
+          <span className="company-name">
+            Servier<span className="company-dot">.</span>
+          </span>
+          <span className="company-name company-carrefour">Carrefour</span>
+          <span className="company-name company-bnp">BNP PARIBAS</span>
+          <span className="company-name company-orange">Orange</span>
+        </div>
       </div>
-    </div>
+      <section
+        className="shell section-space"
+        id="expertise-preview"
+        aria-labelledby="expertise-title"
+      >
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">01 / CE QUE J’APPORTE</p>
+            <h2 id="expertise-title">
+              La complexité technique.
+              <br />
+              <span>Des solutions claires.</span>
+            </h2>
+          </div>
+          <a href="#skills" className="text-link">
+            Toute mon expertise <ArrowUpRight size={18} />
+          </a>
+        </div>
+        <div className="expertise-grid">
+          {expertise.map((item) => (
+            <article className="expertise-item" key={item.number}>
+              <div className="expertise-top">
+                <item.icon size={27} strokeWidth={1.5} />
+                <span>{item.number}</span>
+              </div>
+              <h3>{item.title}</h3>
+              <p>{item.text}</p>
+              <div className="mono-tags">{item.tags}</div>
+            </article>
+          ))}
+        </div>
+      </section>
+      <section
+        className="project-section section-space"
+        aria-labelledby="project-title"
+      >
+        <div className="shell">
+          <div className="section-heading">
+            <div>
+              <p className="eyebrow">02 / DU TERRAIN, DU CONCRET</p>
+              <h2 id="project-title">L’architecture prend vie.</h2>
+            </div>
+            <a href="#case-studies" className="text-link">
+              Voir l’étude de cas <ArrowUpRight size={18} />
+            </a>
+          </div>
+          <a
+            className="featured-project"
+            href="#case-studies"
+            aria-label="Découvrir l’étude de cas : migration CRM vers le cloud hybride"
+          >
+            <div className="project-diagram" aria-hidden="true">
+              <div className="diagram-topline">
+                <span>ARCHITECTURE / CLOUD HYBRIDE</span>
+                <Network size={17} />
+              </div>
+              <div className="diagram-source">
+                <Layers3 size={25} />
+                <span>
+                  CRM UNICA<small>Infrastructure existante</small>
+                </span>
+              </div>
+              <div className="diagram-connector">
+                <span>MIGRATION & AUTOMATISATION</span>
+              </div>
+              <div className="diagram-targets">
+                <div>
+                  <Cloud size={29} />
+                  <strong>Google Cloud</strong>
+                  <span>Applications</span>
+                </div>
+                <div>
+                  <Terminal size={27} />
+                  <strong>Oracle Cloud</strong>
+                  <span>Données</span>
+                </div>
+              </div>
+              <div className="diagram-bottom">
+                <span>TERRAFORM</span>
+                <span>GITLAB CI/CD</span>
+                <span>OBSERVABILITÉ</span>
+              </div>
+            </div>
+            <div className="project-copy">
+              <span className="project-kicker">CARREFOUR / CLOUD & DEVOPS</span>
+              <h3>
+                Un CRM critique. <br />
+                Un nouveau terrain <br />
+                dans le cloud.
+              </h3>
+              <p>
+                Accompagner la migration d’une infrastructure on-premise vers
+                GCP et OCI, et repenser la chaîne de déploiement.
+              </p>
+              <div className="project-tags">
+                <span>Cloud hybride</span>
+                <span>Infrastructure as Code</span>
+                <span>CI/CD</span>
+              </div>
+              <span className="project-link">
+                Découvrir le projet <ArrowUpRight size={21} />
+              </span>
+            </div>
+          </a>
+        </div>
+      </section>
+      <section className="shell section-space" aria-labelledby="career-title">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">03 / MON FIL CONDUCTEUR</p>
+            <h2 id="career-title">Faire avancer la production.</h2>
+          </div>
+          <a href="#experience" className="text-link">
+            Le parcours complet <ArrowUpRight size={18} />
+          </a>
+        </div>
+        <div className="career-list">
+          {[
+            {
+              company: "Servier",
+              role: "Ingénieur Cloud / DataOps",
+              text: "Infrastructure as Code, observabilité et automatisation sur GCP.",
+              tag: "CLOUD & DATA",
+            },
+            {
+              company: "Carrefour",
+              role: "Ingénieur Cloud DevOps",
+              text: "Migration cloud hybride, CI/CD et release management.",
+              tag: "CLOUD & DELIVERY",
+            },
+            {
+              company: "BNP Paribas",
+              role: "Chef de projet technique",
+              text: "Coordination technique et mise en production d’applications.",
+              tag: "PRODUCTION & PROJETS",
+            },
+          ].map((item, index) => (
+            <a href="#experience" className="career-row" key={item.company}>
+              <span className="career-index">0{index + 1}</span>
+              <h3>{item.company}</h3>
+              <div>
+                <h4>{item.role}</h4>
+                <p>{item.text}</p>
+              </div>
+              <span className="career-tag">{item.tag}</span>
+              <ArrowUpRight size={20} />
+            </a>
+          ))}
+        </div>
+      </section>
+      <section
+        className="shell knowledge-section"
+        aria-labelledby="knowledge-title"
+      >
+        <div className="knowledge-copy">
+          <p className="eyebrow">04 / APPRENDRE & TRANSMETTRE</p>
+          <h2 id="knowledge-title">
+            La connaissance
+            <br />
+            se partage.
+          </h2>
+          <p>
+            Écrire sur le DevOps, continuer à se former et garder un œil sur les
+            évolutions de notre métier.
+          </p>
+        </div>
+        <div className="knowledge-links">
+          <a
+            href="https://www.amazon.fr/dp/B0CGWN1PCK"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <BookOpen size={24} />
+            <span>
+              <strong>Mon livre DevOps</strong>
+              <small>Du terrain aux pages. À découvrir sur Amazon.</small>
+            </span>
+            <ArrowUpRight size={20} />
+          </a>
+          <a
+            href="https://www.cloudskillsboost.google/public_profiles/c3800e34-0c7d-44d8-9ee7-418a32cb2389"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Award size={24} />
+            <span>
+              <strong>Mon parcours Google Skills</strong>
+              <small>Formations, badges et apprentissage continu.</small>
+            </span>
+            <ArrowUpRight size={20} />
+          </a>
+          <a href="#tech-watch">
+            <Network size={24} />
+            <span>
+              <strong>Mes sources de veille</strong>
+              <small>Cloud, DevOps et automatisation.</small>
+            </span>
+            <ArrowUpRight size={20} />
+          </a>
+        </div>
+      </section>
+    </>
   );
-};
-
-export default Hero;
+}

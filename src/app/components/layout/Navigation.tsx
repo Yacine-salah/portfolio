@@ -1,55 +1,73 @@
-'use client';
+"use client";
 
-import React from 'react';
-import { Home, Cpu, Briefcase, Book, FileText, Rss, LucideIcon } from 'lucide-react';
-import type { TabType } from '@/app/types';
+import { useState } from "react";
+import Image from "next/image";
+import { ArrowUpRight, Menu, X } from "lucide-react";
+import type { TabType } from "@/app/types";
 
-interface NavigationProps {
-  activeTab: TabType;
-  setActiveTab: (tab: TabType) => void;
-}
+const tabs: { id: TabType; label: string }[] = [
+  { id: "home", label: "Accueil" },
+  { id: "skills", label: "Expertise" },
+  { id: "experience", label: "Parcours" },
+  { id: "case-studies", label: "Projets" },
+  { id: "education", label: "Formation" },
+  { id: "tech-watch", label: "Veille" },
+];
 
-interface TabItem {
-  id: TabType;
-  label: string;
-  icon: LucideIcon  ; // ou LucideIcon si vous importez le type de lucide-react
-}
-
-const Navigation: React.FC<NavigationProps> = ({ activeTab, setActiveTab }) => {
-  const tabs: TabItem[] = [
-    { id: 'home', label: 'Accueil', icon: Home },
-    { id: 'skills', label: 'Compétences', icon: Cpu },
-    { id: 'experience', label: 'Expérience', icon: Briefcase },
-    { id: 'education', label: 'Formation', icon: Book },
-    { id: 'case-studies', label: 'Études de Cas', icon: FileText },
-    { id: 'tech-watch', label: 'Veille Tech', icon: Rss  } 
-  ];
-
+export default function Navigation({ activeTab }: { activeTab: TabType }) {
+  const [menuOpen, setMenuOpen] = useState(false);
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-black/50 backdrop-blur-lg border-b border-blue-500/20 z-50">
-      <div className="container mx-auto px-4">
-        <div className="flex justify-between items-center h-16">
-          <div className="text-xl font-bold text-blue-400">Y.S</div>
-          <div className="flex space-x-8">
-            {tabs.map(tab => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-300 ${
-                  activeTab === tab.id 
-                    ? 'bg-blue-500 text-white' 
-                    : 'hover:bg-blue-500/20'
-                }`}
-              >
-                <tab.icon size={16} />
-                {tab.label}
-              </button>
-            ))}
-          </div>
-        </div>
+    <header className="site-header">
+      <div className="shell header-inner">
+        <a
+          href="#home"
+          className="brand"
+          aria-label="Yacine Salah — accueil"
+          onClick={() => setMenuOpen(false)}
+        >
+          <Image
+            src="/brand/ys-mark.svg"
+            alt=""
+            width={46}
+            height={46}
+            priority
+          />
+          <span>
+            YACINE SALAH<span className="brand-caption">CLOUD & DEVOPS</span>
+          </span>
+        </a>
+        <nav
+          className={`main-nav ${menuOpen ? "is-open" : ""}`}
+          id="main-navigation"
+          aria-label="Navigation principale"
+        >
+          {tabs.map((tab) => (
+            <a
+              key={tab.id}
+              href={`#${tab.id}`}
+              aria-current={activeTab === tab.id ? "page" : undefined}
+              onClick={() => setMenuOpen(false)}
+            >
+              {tab.label}
+            </a>
+          ))}
+          <a className="mobile-contact" href="mailto:yacine.salah77@gmail.com">
+            Parlons de votre projet <ArrowUpRight size={16} />
+          </a>
+        </nav>
+        <a className="header-contact" href="mailto:yacine.salah77@gmail.com">
+          On échange <ArrowUpRight size={16} />
+        </a>
+        <button
+          className="menu-toggle"
+          aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+          aria-expanded={menuOpen}
+          aria-controls="main-navigation"
+          onClick={() => setMenuOpen(!menuOpen)}
+        >
+          {menuOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
       </div>
-    </nav>
+    </header>
   );
-};
-
-export default Navigation;
+}
