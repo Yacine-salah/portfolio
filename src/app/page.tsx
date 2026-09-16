@@ -53,11 +53,14 @@ const headings: Record<
 
 export default function Home() {
   const [activeTab, setActiveTab] = useState<TabType>("home");
+  const [activeCase, setActiveCase] = useState(0);
   const mainRef = useRef<HTMLElement>(null);
   useEffect(() => {
     const syncHash = (event?: HashChangeEvent) => {
-      const hash = window.location.hash.slice(1) as TabType;
+      const [section, project] = window.location.hash.slice(1).split("/");
+      const hash = section as TabType;
       setActiveTab(tabIds.includes(hash) ? hash : "home");
+      setActiveCase(project === "crm" ? 1 : 0);
       window.scrollTo({ top: 0, behavior: "instant" });
       if (event) mainRef.current?.focus({ preventScroll: true });
     };
@@ -91,7 +94,9 @@ export default function Home() {
             {activeTab === "skills" && <Skills />}
             {activeTab === "experience" && <Experience />}
             {activeTab === "education" && <Education />}
-            {activeTab === "case-studies" && <CaseStudies />}
+            {activeTab === "case-studies" && (
+              <CaseStudies activeCase={activeCase} />
+            )}
             {activeTab === "tech-watch" && <TechWatch />}
           </div>
         )}
@@ -128,7 +133,7 @@ export default function Home() {
             <a href="mailto:yacine.salah77@gmail.com">
               yacine.salah77@gmail.com
             </a>
-            <span>Lisses, Île-de-France</span>
+            <span>Bondoufle, Île-de-France</span>
             <a
               href="https://www.linkedin.com/in/yacine-salah-a0bb3176/"
               target="_blank"

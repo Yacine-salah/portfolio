@@ -363,10 +363,12 @@ a {
 }
 .company-inner {
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
   gap: 30px;
   min-height: 122px;
+  padding-block: 24px;
 }
 .company-inner p {
   font-family: var(--font-mono), monospace;
@@ -386,6 +388,10 @@ a {
 }
 .company-dot {
   color: var(--accent);
+}
+.company-thales {
+  font-size: 23px;
+  letter-spacing: 0.12em;
 }
 .company-carrefour {
   font-family: Georgia, serif;
@@ -629,6 +635,261 @@ a {
 }
 .project-link svg {
   color: var(--accent);
+}
+.personal-project {
+  display: grid;
+  grid-template-columns: 76px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 30px;
+  margin-top: 24px;
+  padding: 32px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  transition: border-color 0.2s;
+}
+.personal-project:hover {
+  border-color: var(--accent);
+}
+.personal-project-icon {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  color: var(--accent);
+  background: #fd5a4f0d;
+  border: 1px solid #fd5a4f40;
+  border-radius: 14px;
+}
+.personal-project-copy h2,
+.personal-project-copy h3 {
+  margin-top: 10px;
+  font-size: 27px;
+  font-weight: 500;
+  letter-spacing: -0.035em;
+}
+.personal-project-copy > p:last-child {
+  max-width: 610px;
+  margin-top: 10px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.personal-project-link {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  font-size: 12px;
+}
+.personal-project-link svg {
+  color: var(--accent);
+}
+.personal-project-intro {
+  margin-bottom: 40px;
+}
+.personal-project-intro .personal-project {
+  margin-top: 0;
+}
+.ansible-project {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  align-items: center;
+  gap: 46px;
+  padding: 38px;
+  margin-bottom: 26px;
+  border: 1px solid #51594e;
+  border-radius: 7px;
+  background: #222722;
+}
+.ansible-project-copy h3 {
+  margin-top: 19px;
+  font-size: clamp(30px, 3vw, 40px);
+  font-weight: 500;
+  line-height: 1.15;
+  letter-spacing: -0.04em;
+}
+.ansible-project-copy > p:not(.project-kicker) {
+  margin-top: 22px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--muted);
+}
+.ansible-team {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  margin-top: 23px;
+  color: var(--muted);
+  font-size: 12px;
+}
+.ansible-team svg,
+.ansible-team strong {
+  color: var(--accent);
+}
+.ansible-project-copy > .text-link {
+  margin-top: 30px;
+}
+.ansible-demo {
+  min-width: 0;
+  padding: 24px;
+  color: var(--foreground);
+  background: #131714;
+  border: 1px solid #454f42;
+  border-radius: 7px;
+}
+.demo-header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-mono), monospace;
+  font-size: 9px;
+  letter-spacing: 0.035em;
+  color: var(--muted);
+}
+.demo-header > svg {
+  color: var(--accent);
+  flex-shrink: 0;
+}
+.demo-pill {
+  margin-left: auto;
+  padding: 3px 6px;
+  border: 1px solid #50584b;
+  border-radius: 3px;
+  font-size: 8px;
+}
+.demo-command {
+  padding-block: 23px;
+  font-family: var(--font-mono), monospace;
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.demo-command > span {
+  color: var(--accent);
+  padding-right: 7px;
+}
+.demo-steps {
+  display: grid;
+  gap: 16px;
+}
+.demo-steps li {
+  display: grid;
+  grid-template-columns: 20px minmax(0, 1fr) 47px;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-mono), monospace;
+  font-size: 10px;
+  line-height: 1.6;
+  color: #a6afa3;
+}
+.demo-step-icon {
+  display: grid;
+  place-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #555f4c;
+  border-radius: 50%;
+  font-size: 9px;
+}
+.demo-steps .is-running {
+  color: var(--foreground);
+}
+.demo-steps .is-running .demo-step-icon {
+  border-color: var(--accent);
+  color: var(--accent);
+  animation: demoPulse 1s ease-in-out infinite;
+}
+.demo-steps .is-done .demo-step-icon {
+  color: #bdceab;
+  border-color: #6a8056;
+}
+.demo-status {
+  text-align: right;
+  color: #a8bf93;
+  font-size: 9px;
+}
+.demo-status.is-changed {
+  color: var(--accent);
+}
+.demo-result {
+  min-height: 63px;
+  display: flex;
+  align-items: center;
+  padding-block: 18px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #d1d9ca;
+}
+.demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: center;
+}
+.demo-actions .button {
+  padding: 12px 15px;
+  font-size: 11px;
+  gap: 9px;
+}
+.demo-actions .button:disabled {
+  cursor: wait;
+  opacity: 0.6;
+  transform: none;
+}
+.demo-reset {
+  font-size: 11px;
+  color: var(--muted);
+  min-height: 40px;
+}
+.demo-reset:hover {
+  color: var(--accent);
+}
+.demo-note {
+  margin-top: 15px;
+  color: #a1ab9b;
+  font-size: 9px;
+  line-height: 1.6;
+}
+@keyframes demoPulse {
+  50% {
+    box-shadow: 0 0 0 4px #fd5a4f18;
+  }
+}
+@media (max-width: 1000px) {
+  .ansible-project {
+    gap: 24px;
+    padding: 28px;
+  }
+  .ansible-demo {
+    padding: 20px;
+  }
+}
+@media (max-width: 760px) {
+  .ansible-project {
+    grid-template-columns: 1fr;
+    padding: 24px;
+    gap: 28px;
+  }
+  .ansible-project-copy h3 {
+    font-size: 34px;
+  }
+  .ansible-demo {
+    padding: 17px;
+  }
+  .demo-steps li {
+    gap: 7px;
+    font-size: 9px;
+    grid-template-columns: 19px minmax(0, 1fr) 42px;
+  }
+  .demo-command {
+    font-size: 10px;
+  }
+  .demo-header {
+    font-size: 8px;
+    gap: 6px;
+  }
+  .demo-pill {
+    font-size: 7px;
+  }
 }
 .career-row {
   display: grid;
@@ -1074,6 +1335,17 @@ a {
   }
   .company-inner {
     gap: 18px;
+    justify-content: space-around;
+  }
+  .company-inner > p {
+    flex-basis: 100%;
+    text-align: center;
+  }
+  .company-inner > p br {
+    display: none;
+  }
+  .company-inner > p span {
+    margin-left: 8px;
   }
   .company-name {
     font-size: 25px;
@@ -1112,6 +1384,20 @@ a {
   }
 }
 @media (max-width: 760px) {
+  .personal-project {
+    grid-template-columns: 1fr;
+    gap: 20px;
+    padding: 26px;
+  }
+  .personal-project-icon {
+    width: 56px;
+    height: 56px;
+  }
+  .personal-project-link {
+    justify-content: space-between;
+    padding-top: 18px;
+    border-top: 1px solid var(--line);
+  }
   .shell,
   .detail-page .container {
     width: calc(100% - 40px);

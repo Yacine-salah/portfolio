@@ -14,7 +14,7 @@ import {
 interface ExperienceCardProps {
   title: string;
   company: string;
-  period: string;
+  period?: string;
   description: string;
   achievements: string[];
   environment: string[];
@@ -50,10 +50,12 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
               <h4 className="text-lg text-white">{title}</h4>
             </div>
 
-            <div className="flex items-center gap-2 text-gray-400">
-              <Calendar className="w-4 h-4" />
-              <span>{period}</span>
-            </div>
+            {period && (
+              <div className="flex items-center gap-2 text-gray-400">
+                <Calendar className="w-4 h-4" />
+                <span>{period}</span>
+              </div>
+            )}
           </div>
 
           <p className="mt-4 text-gray-300 leading-relaxed">{description}</p>
@@ -76,7 +78,7 @@ const ExperienceCard: React.FC<ExperienceCardProps> = ({
           </button>
 
           {isExpanded && (
-            <div className="mt-6 space-y-6 animate-fadeIn">
+            <div id={detailId} className="mt-6 space-y-6 animate-fadeIn">
               <div className="space-y-3">
                 <h5 className="flex items-center gap-2 text-white font-semibold">
                   <Briefcase className="w-4 h-4 text-accent-400" />

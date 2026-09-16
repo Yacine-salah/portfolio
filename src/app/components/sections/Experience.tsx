@@ -2,6 +2,7 @@
 
 import React from "react";
 import ExperienceCard from "./ExperienceCard";
+import { thalesExperience } from "@/app/data/thales";
 
 // Définition de l'interface pour le mapping des couleurs
 interface CompanyColors {
@@ -11,6 +12,7 @@ interface CompanyColors {
 const Experience = () => {
   // Données des expériences
   const experiences = [
+    thalesExperience,
     // Première expérience (Servier)
     {
       title: "Ingénieur Cloud / DataOps",
@@ -218,6 +220,7 @@ const Experience = () => {
   // Fonction améliorée pour les gradients de couleur
   const getCompanyClass = (company: string): string => {
     const colorMap: CompanyColors = {
+      THALES: "from-accent-500 to-accent-500",
       SERVIER: "from-accent-500 to-accent-500",
       CARREFOUR: "from-accent-600 to-cyan-500",
       "BNP PARIBAS": "from-green-500 to-emerald-500",

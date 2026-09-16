@@ -1,4 +1,6 @@
 import Image from "next/image";
+import PersonalProject from "./PersonalProject";
+import AnsibleProject from "./AnsibleProject";
 import {
   ArrowDown,
   ArrowRight,
@@ -47,7 +49,7 @@ export default function Hero() {
             <span className="tiny-cross" aria-hidden="true">
               +
             </span>{" "}
-            INGÉNIEUR CLOUD & DEVOPS
+            INGÉNIEUR CLOUD / DEVOPS / SYSOPS
           </p>
           <h1 id="hero-title">
             Le cloud.
@@ -70,8 +72,8 @@ export default function Hero() {
             </a>
           </div>
           <div className="hero-location">
-            <MapPin size={14} /> Lisses, Île-de-France{" "}
-            <span aria-hidden="true">/</span> Cloud · DevOps · DataOps
+            <MapPin size={14} /> Bondoufle, Île-de-France{" "}
+            <span aria-hidden="true">/</span> Cloud · DevOps · SysOps
           </div>
         </div>
         <div className="hero-visual">
@@ -111,15 +113,12 @@ export default function Hero() {
           <button
             className="scroll-cue"
             onClick={() =>
-              document
-                .getElementById("expertise-preview")
-                ?.scrollIntoView({
-                  behavior: window.matchMedia(
-                    "(prefers-reduced-motion: reduce)",
-                  ).matches
-                    ? "instant"
-                    : "smooth",
-                })
+              document.getElementById("expertise-preview")?.scrollIntoView({
+                behavior: window.matchMedia("(prefers-reduced-motion: reduce)")
+                  .matches
+                  ? "instant"
+                  : "smooth",
+              })
             }
             aria-label="Découvrir mon expertise"
           >
@@ -135,6 +134,7 @@ export default function Hero() {
             <br />
             <span>AU SEIN DE LEURS ÉQUIPES</span>
           </p>
+          <span className="company-name company-thales">THALES</span>
           <span className="company-name">
             Servier<span className="company-dot">.</span>
           </span>
@@ -189,9 +189,10 @@ export default function Hero() {
               Voir l’étude de cas <ArrowUpRight size={18} />
             </a>
           </div>
+          <AnsibleProject />
           <a
             className="featured-project"
-            href="#case-studies"
+            href="#case-studies/crm"
             aria-label="Découvrir l’étude de cas : migration CRM vers le cloud hybride"
           >
             <div className="project-diagram" aria-hidden="true">
@@ -247,6 +248,7 @@ export default function Hero() {
               </span>
             </div>
           </a>
+          <PersonalProject headingAs="h3" />
         </div>
       </section>
       <section className="shell section-space" aria-labelledby="career-title">
@@ -261,6 +263,12 @@ export default function Hero() {
         </div>
         <div className="career-list">
           {[
+            {
+              company: "Thales",
+              role: "Ingénieur SysOps",
+              text: "Solution full Ansible pour l’infrastructure des contrôleurs aériens, développée en équipe de quatre.",
+              tag: "SYSOPS & ANSIBLE",
+            },
             {
               company: "Servier",
               role: "Ingénieur Cloud / DataOps",

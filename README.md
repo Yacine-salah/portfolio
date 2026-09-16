@@ -25,6 +25,7 @@ Sur un clone neuf, lancer `npm run build` avant le premier `typecheck` pour gén
 ## Contenu et identité
 
 - `src/app/components/sections/Hero.tsx` : accueil, expertise, projet, parcours et ressources.
+- `src/app/components/sections/PersonalProject.tsx` : présentation et lien vers Why the Blockchain, partagés entre l’accueil et la rubrique Projets.
 - `src/app/components/sections/Experience.tsx` : expériences et dates du parcours original.
 - `src/app/components/sections/CaseStudies.tsx` : étude de cas et indicateurs du site original.
 - `src/app/components/sections/Skills.tsx` : compétences et détails dépliables.
@@ -35,6 +36,10 @@ Sur un clone neuf, lancer `npm run build` avant le premier `typecheck` pour gén
 - `public/brand/apple-touch-icon.png` : version PNG du logo.
 
 Les données professionnelles et les chiffres de l’étude de cas proviennent du dépôt existant ; ils n’ont pas été actualisés ou vérifiés auprès de Yacine pendant cette refonte. La veille est une sélection de liens vers les sources, sans flux automatique ni faux articles datés.
+
+La localisation a été mise à jour à Bondoufle à la demande de Yacine. Son expérience Thales et le projet full Ansible reposent sur ses précisions : ingénieur SysOps, gestion de l’infrastructure des contrôleurs aériens, développement dans une équipe de quatre personnes. Aucune date n’a été ajoutée pour Thales, faute d’information. Le lien Why the Blockchain pointe vers `https://whytheblockchain.com/`, vérifié dans le navigateur.
+
+`src/app/data/thales.ts` centralise le contenu Thales. Le mini-lab dans `AnsibleDemo.tsx` est une simulation pédagogique locale, distincte de l’infrastructure réelle : lancement, second passage sans changement et réinitialisation. Il respecte la préférence de réduction des animations. Les études de cas sont accessibles directement via `#case-studies/thales` et `#case-studies/crm`.
 
 Les six rubriques utilisent des fragments d’URL (`#home`, `#skills`, `#experience`, `#case-studies`, `#education`, `#tech-watch`) et prennent en charge les liens directs et l’historique du navigateur. Le bouton de contact ouvre la messagerie du visiteur.
 

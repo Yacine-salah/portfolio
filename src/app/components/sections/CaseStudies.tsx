@@ -1,6 +1,9 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+import PersonalProject from "./PersonalProject";
+import AnsibleDemo from "./AnsibleDemo";
+import { thalesExperience } from "@/app/data/thales";
 import {
   Cloud,
   CheckCircle2,
@@ -22,10 +25,23 @@ interface CaseStudy {
   }[];
 }
 
-const CaseStudies: React.FC = () => {
-  const [activeCase, setActiveCase] = useState<number>(0);
-
+const CaseStudies: React.FC<{ activeCase: number }> = ({ activeCase }) => {
   const cases: CaseStudy[] = [
+    {
+      title: "Thales — Infrastructure full Ansible",
+      context: thalesExperience.description,
+      challenge:
+        "Automatiser la gestion des infrastructures utilisées par les contrôleurs aériens.",
+      solution:
+        "En tant qu’ingénieur SysOps, contribution au développement d’une solution entièrement basée sur Ansible, au sein d’une équipe de quatre personnes.",
+      results: thalesExperience.achievements,
+      technologies: thalesExperience.environment,
+      metrics: [
+        { label: "Personnes dans l’équipe", value: "4" },
+        { label: "Solution d’automatisation", value: "Ansible" },
+        { label: "Mon rôle", value: "SysOps" },
+      ],
+    },
     {
       title: "Migration CRM vers Cloud Hybride",
       context:
@@ -57,13 +73,20 @@ const CaseStudies: React.FC = () => {
 
   return (
     <div className="container mx-auto px-4 py-12">
+      <div className="personal-project-intro">
+        <PersonalProject />
+      </div>
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Navigation des cas */}
         <div className="lg:col-span-1 space-y-4">
           {cases.map((caseStudy, index) => (
             <button
               key={index}
-              onClick={() => setActiveCase(index)}
+              aria-pressed={activeCase === index}
+              onClick={() => {
+                window.location.hash =
+                  index === 0 ? "case-studies/thales" : "case-studies/crm";
+              }}
               className={`w-full text-left p-4 rounded-lg transition-all ${
                 activeCase === index
                   ? "bg-accent-500/10 border-l-4 border-accent-500"
@@ -78,6 +101,9 @@ const CaseStudies: React.FC = () => {
         {/* Détails du cas */}
         <div className="lg:col-span-2 bg-gray-900/50 rounded-lg p-6">
           <div className="space-y-6">
+            <h2 className="text-2xl font-semibold">
+              {cases[activeCase].title}
+            </h2>
             {/* Contexte */}
             <div>
               <h3 className="flex items-center gap-2 text-lg font-semibold text-accent-400 mb-2">
@@ -139,6 +165,7 @@ const CaseStudies: React.FC = () => {
               </ul>
             </div>
 
+            {activeCase === 0 && <AnsibleDemo />}
             {/* Technologies */}
             <div className="flex flex-wrap gap-2">
               {cases[activeCase].technologies.map((tech, index) => (

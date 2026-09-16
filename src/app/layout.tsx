@@ -14,9 +14,9 @@ const mono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Yacine Salah — Ingénieur Cloud & DevOps",
+  title: "Yacine Salah — Ingénieur Cloud, DevOps & SysOps",
   description:
-    "Ingénieur Cloud, DevOps et DataOps en Île-de-France. Architecture GCP et OCI, Terraform, Kubernetes, CI/CD et observabilité. Découvrez mon parcours et mes projets.",
+    "Ingénieur Cloud, DevOps et SysOps à Bondoufle. Automatisation Ansible, architecture GCP et OCI, Terraform, Kubernetes et observabilité. Découvrez mon parcours et mes projets.",
   icons: { icon: "/brand/ys-mark.svg", apple: "/brand/apple-touch-icon.png" },
   openGraph: {
     title: "Yacine Salah — Le cloud. Le code. Le concret.",
