@@ -1,3 +1,4 @@
+import Reveal from "../motion/Reveal";
 import { BookOpen, ArrowUpRight } from "lucide-react";
 import { education } from "@/app/data/portfolio";
 
@@ -6,16 +7,18 @@ export default function Education() {
     <div className="container py-12">
       <div className="education-list">
         {education.map((edu) => (
-          <article className="education-item" key={edu.degree}>
-            <BookOpen size={33} />
-            <div>
-              <h2>{edu.degree}</h2>
-              <p className="school">{edu.school}</p>
-              <p>
-                {edu.period} · {edu.details}
-              </p>
-            </div>
-          </article>
+          <Reveal key={edu.degree}>
+            <article className="education-item">
+              <BookOpen size={33} />
+              <div>
+                <h2>{edu.degree}</h2>
+                <p className="school">{edu.school}</p>
+                <p>
+                  {edu.period} · {edu.details}
+                </p>
+              </div>
+            </article>
+          </Reveal>
         ))}
       </div>
       <a

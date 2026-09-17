@@ -1693,3 +1693,265 @@ a {
     scroll-behavior: auto !important;
   }
 }
+:root {
+  --motion-fast: 180ms;
+  --motion-normal: 350ms;
+  --motion-slow: 600ms;
+  --motion-ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Light and depth respond to intent; nothing runs in a perpetual loop. */
+.depth-surface {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  height: 100%;
+}
+.surface-light {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 340px;
+  height: 340px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  z-index: 2;
+  background: radial-gradient(
+    circle,
+    #fd5a4f16,
+    #fd5a4f06 40%,
+    transparent 70%
+  );
+}
+.expertise-item.depth-surface {
+  padding: 25px 22px 24px;
+  background: linear-gradient(135deg, #25282785, #17191900);
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  transition: border-color var(--motion-normal);
+}
+.expertise-grid {
+  gap: 22px;
+}
+.resource-card.depth-surface {
+  display: block;
+}
+.skill-card.depth-surface,
+.resource-card.depth-surface {
+  transition: border-color var(--motion-normal);
+}
+.portrait-parallax {
+  position: relative;
+}
+.portrait-scene {
+  position: relative;
+  transform-style: preserve-3d;
+}
+.portrait-depth {
+  position: absolute;
+  inset: 9px -9px -11px 12px;
+  border: 1px solid #fd5a4f45;
+  border-radius: 150px 8px 8px 8px;
+  transform: translateZ(-24px);
+  pointer-events: none;
+}
+.portrait-scene .portrait-stage {
+  background:
+    radial-gradient(ellipse at 80% 10%, #fd5a4f15, transparent 60%), #252c28;
+  box-shadow: 0 26px 65px -35px #000a;
+}
+.portrait-scene .portrait-circle {
+  background: radial-gradient(circle at 35% 25%, #d0d2b3, #a9ac87 66%, #535746);
+  box-shadow: 0 0 65px #b7bd9c0c;
+}
+.portrait-orbit {
+  position: absolute;
+  width: 390px;
+  aspect-ratio: 1;
+  max-width: 105%;
+  top: 52px;
+  left: 50%;
+  border: 1px solid #fd5a4f60;
+  border-radius: 50%;
+  transform: translateX(-50%) rotate(-28deg) scaleY(0.74);
+  z-index: -1;
+}
+.portrait-orbit::after {
+  content: "";
+  position: absolute;
+  width: 5px;
+  height: 5px;
+  top: 44px;
+  right: 46px;
+  border-radius: 50%;
+  background: var(--accent);
+  box-shadow: 0 0 14px #fd5a4f90;
+}
+.portrait-scene .portrait-label {
+  transform: translateZ(35px);
+  pointer-events: none;
+}
+.portrait-scene .portrait-label span {
+  background: #171919eb;
+  border-left: 1px solid var(--accent);
+  box-shadow: 0 5px 15px #0002;
+}
+.portrait-light {
+  background: radial-gradient(circle, #fff3 0%, #fd5a4f12 38%, transparent 70%);
+}
+.motion-preference {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  min-height: 32px;
+  font-size: 10px;
+  color: var(--muted);
+}
+.motion-preference:hover {
+  color: var(--foreground);
+}
+.motion-preference:disabled {
+  cursor: default;
+}
+.footer-bottom {
+  flex-wrap: wrap;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  [data-motion="on"] .depth-surface:hover {
+    border-color: #fd5a4f85;
+  }
+  [data-motion="on"] .button-primary {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  [data-motion="on"] .button-primary::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      110deg,
+      transparent 25%,
+      #fff4,
+      transparent 75%
+    );
+    transform: translateX(-110%);
+    transition: transform var(--motion-slow) var(--motion-ease);
+    pointer-events: none;
+  }
+  [data-motion="on"] .button-primary:hover::before {
+    transform: translateX(110%);
+  }
+  [data-motion="on"]
+    :is(
+      .text-link,
+      .button,
+      .career-row,
+      .knowledge-links a,
+      .header-contact,
+      .personal-project-link
+    )
+    > svg {
+    transition: transform var(--motion-normal) var(--motion-ease);
+  }
+  [data-motion="on"]
+    :is(
+      .text-link,
+      .button,
+      .career-row,
+      .knowledge-links a,
+      .header-contact
+    ):hover
+    > svg,
+  [data-motion="on"] .personal-project:hover .personal-project-link > svg {
+    transform: translate(3px, -3px);
+  }
+  [data-motion="on"] .career-row {
+    transition: background var(--motion-normal);
+  }
+  [data-motion="on"] .career-row h3 {
+    transition:
+      transform var(--motion-normal) var(--motion-ease),
+      color var(--motion-normal);
+  }
+  [data-motion="on"] .career-row:hover h3 {
+    transform: translateX(5px);
+    color: var(--accent);
+  }
+  [data-motion="on"] .main-nav a::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 1px;
+    height: 1px;
+    background: var(--accent);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform var(--motion-normal) var(--motion-ease);
+  }
+  [data-motion="on"] .main-nav a:hover::before {
+    transform: scaleX(1);
+  }
+}
+[data-motion="off"]
+  :is(
+    [data-reveal],
+    .page-transition,
+    .depth-surface,
+    .portrait-parallax,
+    .portrait-scene,
+    .button,
+    .contact-circle
+  ) {
+  transform: none !important;
+  opacity: 1 !important;
+}
+[data-motion="off"] .surface-light {
+  display: none;
+}
+[data-motion="off"] *,
+[data-motion="off"] *::before,
+[data-motion="off"] *::after {
+  animation: none !important;
+  transition: none !important;
+}
+@media (max-width: 900px) {
+  .portrait-depth {
+    border-top-left-radius: 100px;
+  }
+  .portrait-orbit {
+    width: 330px;
+  }
+}
+@media (max-width: 760px) {
+  .portrait-depth {
+    inset: 6px -6px -7px 8px;
+  }
+  .portrait-scene .portrait-label {
+    transform: none;
+  }
+  .expertise-grid {
+    gap: 18px;
+  }
+  .motion-preference {
+    min-height: 44px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  :is(
+    [data-reveal],
+    .page-transition,
+    .depth-surface,
+    .portrait-parallax,
+    .portrait-scene
+  ) {
+    transform: none !important;
+    opacity: 1 !important;
+  }
+  .surface-light {
+    display: none;
+  }
+}

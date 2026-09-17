@@ -1,5 +1,6 @@
 "use client";
 
+import Reveal from "../motion/Reveal";
 import React from "react";
 import ExperienceCard from "./ExperienceCard";
 import { thalesExperience } from "@/app/data/thales";
@@ -240,14 +241,14 @@ const Experience = () => {
         <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-gradient-to-b from-accent-500 via-accent-500 to-orange-500 hidden lg:block" />
 
         {experiences.map((experience, index) => (
-          <div key={index} className="lg:pl-8 relative">
+          <Reveal key={index} className="lg:pl-8 relative">
             <div className="absolute left-[-4px] top-0 w-2 h-2 rounded-full bg-accent-500 hidden lg:block" />
 
             <ExperienceCard
               {...experience}
               colorGradient={getCompanyClass(experience.company)}
             />
-          </div>
+          </Reveal>
         ))}
       </div>
     </div>

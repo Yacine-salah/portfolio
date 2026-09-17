@@ -1,4 +1,6 @@
 "use client";
+import DepthSurface from "../motion/DepthSurface";
+import Reveal from "../motion/Reveal";
 import { useState } from "react";
 import { ArrowUpRight } from "lucide-react";
 
@@ -71,21 +73,23 @@ export default function TechWatch() {
         {filtered.length} sources affichées
       </p>
       <div className="resource-grid">
-        {filtered.map((source) => (
-          <a
-            className="resource-card"
-            key={source.name}
-            href={source.url}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <div>
-              <h2>{source.name}</h2>
-              <ArrowUpRight size={19} />
-            </div>
-            <p>{source.description}</p>
-            <span>{source.category}</span>
-          </a>
+        {filtered.map((source, index) => (
+          <Reveal key={source.name} delay={index % 3}>
+            <DepthSurface
+              as="a"
+              className="resource-card"
+              href={source.url}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div>
+                <h2>{source.name}</h2>
+                <ArrowUpRight size={19} />
+              </div>
+              <p>{source.description}</p>
+              <span>{source.category}</span>
+            </DepthSurface>
+          </Reveal>
         ))}
       </div>
     </div>

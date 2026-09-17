@@ -1,4 +1,7 @@
-import Image from "next/image";
+import PortraitScene from "../motion/PortraitScene";
+import Reveal from "../motion/Reveal";
+import DepthSurface from "../motion/DepthSurface";
+import MagneticLink from "../motion/MagneticLink";
 import PersonalProject from "./PersonalProject";
 import AnsibleProject from "./AnsibleProject";
 import {
@@ -64,9 +67,12 @@ export default function Hero() {
             vos équipes se concentrent sur ce qui compte.
           </p>
           <div className="hero-actions">
-            <a href="#case-studies" className="button button-primary">
+            <MagneticLink
+              href="#case-studies"
+              className="button button-primary"
+            >
               Explorer mes projets <ArrowUpRight size={18} />
-            </a>
+            </MagneticLink>
             <a href="mailto:yacine.salah77@gmail.com" className="text-link">
               Faisons connaissance <ArrowRight size={17} />
             </a>
@@ -76,38 +82,7 @@ export default function Hero() {
             <span aria-hidden="true">/</span> Cloud · DevOps · SysOps
           </div>
         </div>
-        <div className="hero-visual">
-          <div className="portrait-stage">
-            <div className="portrait-grid" aria-hidden="true" />
-            <div className="portrait-circle" aria-hidden="true" />
-            <span className="portrait-coordinate" aria-hidden="true">
-              YS — 01
-            </span>
-            <span className="portrait-plus" aria-hidden="true">
-              +
-            </span>
-            <Image
-              className="hero-portrait"
-              src="/images/photo-profil.png"
-              alt="Yacine Salah, ingénieur Cloud et DevOps"
-              width={299}
-              height={358}
-              sizes="(max-width: 760px) 90vw, 40vw"
-              priority
-            />
-            <div className="portrait-label">
-              <span>LA TECHNIQUE AU SERVICE</span>
-              <span>DE VOS AMBITIONS.</span>
-            </div>
-          </div>
-          <div className="visual-caption">
-            <span>
-              <span className="status-dot" /> CONCEVOIR. AUTOMATISER.
-              FIABILISER.
-            </span>
-            <span aria-hidden="true">[ YS ]</span>
-          </div>
-        </div>
+        <PortraitScene />
         <div className="hero-bottom">
           <span>DE L’INFRASTRUCTURE À L’IMPACT</span>
           <button
@@ -148,7 +123,7 @@ export default function Hero() {
         id="expertise-preview"
         aria-labelledby="expertise-title"
       >
-        <div className="section-heading">
+        <Reveal className="section-heading">
           <div>
             <p className="eyebrow">01 / CE QUE J’APPORTE</p>
             <h2 id="expertise-title">
@@ -160,18 +135,20 @@ export default function Hero() {
           <a href="#skills" className="text-link">
             Toute mon expertise <ArrowUpRight size={18} />
           </a>
-        </div>
+        </Reveal>
         <div className="expertise-grid">
-          {expertise.map((item) => (
-            <article className="expertise-item" key={item.number}>
-              <div className="expertise-top">
-                <item.icon size={27} strokeWidth={1.5} />
-                <span>{item.number}</span>
-              </div>
-              <h3>{item.title}</h3>
-              <p>{item.text}</p>
-              <div className="mono-tags">{item.tags}</div>
-            </article>
+          {expertise.map((item, index) => (
+            <Reveal key={item.number} delay={index}>
+              <DepthSurface as="article" className="expertise-item">
+                <div className="expertise-top">
+                  <item.icon size={27} strokeWidth={1.5} />
+                  <span>{item.number}</span>
+                </div>
+                <h3>{item.title}</h3>
+                <p>{item.text}</p>
+                <div className="mono-tags">{item.tags}</div>
+              </DepthSurface>
+            </Reveal>
           ))}
         </div>
       </section>
@@ -180,7 +157,7 @@ export default function Hero() {
         aria-labelledby="project-title"
       >
         <div className="shell">
-          <div className="section-heading">
+          <Reveal className="section-heading">
             <div>
               <p className="eyebrow">02 / DU TERRAIN, DU CONCRET</p>
               <h2 id="project-title">L’architecture prend vie.</h2>
@@ -188,71 +165,76 @@ export default function Hero() {
             <a href="#case-studies" className="text-link">
               Voir l’étude de cas <ArrowUpRight size={18} />
             </a>
-          </div>
+          </Reveal>
           <AnsibleProject />
-          <a
-            className="featured-project"
-            href="#case-studies/crm"
-            aria-label="Découvrir l’étude de cas : migration CRM vers le cloud hybride"
-          >
-            <div className="project-diagram" aria-hidden="true">
-              <div className="diagram-topline">
-                <span>ARCHITECTURE / CLOUD HYBRIDE</span>
-                <Network size={17} />
+          <Reveal>
+            <DepthSurface
+              as="a"
+              className="featured-project"
+              href="#case-studies/crm"
+              aria-label="Découvrir l’étude de cas : migration CRM vers le cloud hybride"
+            >
+              <div className="project-diagram" aria-hidden="true">
+                <div className="diagram-topline">
+                  <span>ARCHITECTURE / CLOUD HYBRIDE</span>
+                  <Network size={17} />
+                </div>
+                <div className="diagram-source">
+                  <Layers3 size={25} />
+                  <span>
+                    CRM UNICA<small>Infrastructure existante</small>
+                  </span>
+                </div>
+                <div className="diagram-connector">
+                  <span>MIGRATION & AUTOMATISATION</span>
+                </div>
+                <div className="diagram-targets">
+                  <div>
+                    <Cloud size={29} />
+                    <strong>Google Cloud</strong>
+                    <span>Applications</span>
+                  </div>
+                  <div>
+                    <Terminal size={27} />
+                    <strong>Oracle Cloud</strong>
+                    <span>Données</span>
+                  </div>
+                </div>
+                <div className="diagram-bottom">
+                  <span>TERRAFORM</span>
+                  <span>GITLAB CI/CD</span>
+                  <span>OBSERVABILITÉ</span>
+                </div>
               </div>
-              <div className="diagram-source">
-                <Layers3 size={25} />
-                <span>
-                  CRM UNICA<small>Infrastructure existante</small>
+              <div className="project-copy">
+                <span className="project-kicker">
+                  CARREFOUR / CLOUD & DEVOPS
+                </span>
+                <h3>
+                  Un CRM critique. <br />
+                  Un nouveau terrain <br />
+                  dans le cloud.
+                </h3>
+                <p>
+                  Accompagner la migration d’une infrastructure on-premise vers
+                  GCP et OCI, et repenser la chaîne de déploiement.
+                </p>
+                <div className="project-tags">
+                  <span>Cloud hybride</span>
+                  <span>Infrastructure as Code</span>
+                  <span>CI/CD</span>
+                </div>
+                <span className="project-link">
+                  Découvrir le projet <ArrowUpRight size={21} />
                 </span>
               </div>
-              <div className="diagram-connector">
-                <span>MIGRATION & AUTOMATISATION</span>
-              </div>
-              <div className="diagram-targets">
-                <div>
-                  <Cloud size={29} />
-                  <strong>Google Cloud</strong>
-                  <span>Applications</span>
-                </div>
-                <div>
-                  <Terminal size={27} />
-                  <strong>Oracle Cloud</strong>
-                  <span>Données</span>
-                </div>
-              </div>
-              <div className="diagram-bottom">
-                <span>TERRAFORM</span>
-                <span>GITLAB CI/CD</span>
-                <span>OBSERVABILITÉ</span>
-              </div>
-            </div>
-            <div className="project-copy">
-              <span className="project-kicker">CARREFOUR / CLOUD & DEVOPS</span>
-              <h3>
-                Un CRM critique. <br />
-                Un nouveau terrain <br />
-                dans le cloud.
-              </h3>
-              <p>
-                Accompagner la migration d’une infrastructure on-premise vers
-                GCP et OCI, et repenser la chaîne de déploiement.
-              </p>
-              <div className="project-tags">
-                <span>Cloud hybride</span>
-                <span>Infrastructure as Code</span>
-                <span>CI/CD</span>
-              </div>
-              <span className="project-link">
-                Découvrir le projet <ArrowUpRight size={21} />
-              </span>
-            </div>
-          </a>
+            </DepthSurface>
+          </Reveal>
           <PersonalProject headingAs="h3" />
         </div>
       </section>
       <section className="shell section-space" aria-labelledby="career-title">
-        <div className="section-heading">
+        <Reveal className="section-heading">
           <div>
             <p className="eyebrow">03 / MON FIL CONDUCTEUR</p>
             <h2 id="career-title">Faire avancer la production.</h2>
@@ -260,7 +242,7 @@ export default function Hero() {
           <a href="#experience" className="text-link">
             Le parcours complet <ArrowUpRight size={18} />
           </a>
-        </div>
+        </Reveal>
         <div className="career-list">
           {[
             {
@@ -288,16 +270,18 @@ export default function Hero() {
               tag: "PRODUCTION & PROJETS",
             },
           ].map((item, index) => (
-            <a href="#experience" className="career-row" key={item.company}>
-              <span className="career-index">0{index + 1}</span>
-              <h3>{item.company}</h3>
-              <div>
-                <h4>{item.role}</h4>
-                <p>{item.text}</p>
-              </div>
-              <span className="career-tag">{item.tag}</span>
-              <ArrowUpRight size={20} />
-            </a>
+            <Reveal key={item.company}>
+              <a href="#experience" className="career-row">
+                <span className="career-index">0{index + 1}</span>
+                <h3>{item.company}</h3>
+                <div>
+                  <h4>{item.role}</h4>
+                  <p>{item.text}</p>
+                </div>
+                <span className="career-tag">{item.tag}</span>
+                <ArrowUpRight size={20} />
+              </a>
+            </Reveal>
           ))}
         </div>
       </section>

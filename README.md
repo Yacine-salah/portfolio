@@ -43,7 +43,15 @@ La localisation a été mise à jour à Bondoufle à la demande de Yacine. Son e
 
 Les six rubriques utilisent des fragments d’URL (`#home`, `#skills`, `#experience`, `#case-studies`, `#education`, `#tech-watch`) et prennent en charge les liens directs et l’historique du navigateur. Le bouton de contact ouvre la messagerie du visiteur.
 
-## Vercel
+## Motion design
+
+Le mouvement reste ponctuel : portrait en perspective avec reflet au pointeur, profondeur légère sur les cartes, parallaxe limitée au portrait, apparitions uniques au scroll et transitions entre rubriques. Les durées et ressorts sont centralisés dans `src/app/lib/motion.ts` ; les composants réutilisables se trouvent dans `src/app/components/motion/`.
+
+Motion utilise `LazyMotion` avec les seules fonctionnalités nécessaires. Aucun moteur WebGL, curseur de remplacement, scroll forcé ou animation décorative en boucle. Les suivis du pointeur utilisent des valeurs animées sans rendu React à chaque image. Ils sont désactivés sur les écrans tactiles et les appareils à faible nombre de cœurs.
+
+Le contenu est visible dans le HTML initial. Les éléments révélés au scroll deviennent immédiatement visibles s’ils reçoivent le focus au clavier. `prefers-reduced-motion` désactive les mouvements, y compris lors d’un changement de préférence pendant la visite. Le bouton en pied de page permet de mettre les animations en pause ; ce choix est mémorisé localement et la préférence système reste prioritaire.
+
+## Déploiement
 
 Conserver le projet GitHub/Vercel existant, le framework Next.js, la racine du dépôt et Node.js 24. La commande de build est `npm run build` et la sortie reste celle de Next.js. Aucun secret ni variable d’environnement n’est nécessaire.
 

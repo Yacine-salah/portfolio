@@ -1,4 +1,6 @@
 "use client";
+import Reveal from "../motion/Reveal";
+import DepthSurface from "../motion/DepthSurface";
 import { useState } from "react";
 import {
   Monitor,
@@ -122,38 +124,40 @@ export default function Skills() {
         {skillCategories.map((category, index) => {
           const expanded = activeCard === index;
           return (
-            <article className="skill-card" key={category.title}>
-              <h2>
-                <category.icon size={23} />
-                {category.title}
-              </h2>
-              <div className="skill-pills" id={`skills-${index}`}>
-                {(expanded
-                  ? category.skills
-                  : category.skills.slice(0, VISIBLE_SKILLS)
-                ).map((skill) => (
-                  <span key={skill}>{skill}</span>
-                ))}
-              </div>
-              {category.skills.length > VISIBLE_SKILLS && (
-                <button
-                  className="skill-expand"
-                  aria-expanded={expanded}
-                  aria-controls={`skills-${index}`}
-                  onClick={() => setActiveCard(expanded ? null : index)}
-                >
-                  {expanded
-                    ? "Voir moins"
-                    : `Voir ${category.skills.length - VISIBLE_SKILLS} de plus`}
-                  <ChevronDown
-                    size={15}
-                    style={{
-                      transform: expanded ? "rotate(180deg)" : undefined,
-                    }}
-                  />
-                </button>
-              )}
-            </article>
+            <Reveal key={category.title} delay={index % 3}>
+              <DepthSurface as="article" className="skill-card">
+                <h2>
+                  <category.icon size={23} />
+                  {category.title}
+                </h2>
+                <div className="skill-pills" id={`skills-${index}`}>
+                  {(expanded
+                    ? category.skills
+                    : category.skills.slice(0, VISIBLE_SKILLS)
+                  ).map((skill) => (
+                    <span key={skill}>{skill}</span>
+                  ))}
+                </div>
+                {category.skills.length > VISIBLE_SKILLS && (
+                  <button
+                    className="skill-expand"
+                    aria-expanded={expanded}
+                    aria-controls={`skills-${index}`}
+                    onClick={() => setActiveCard(expanded ? null : index)}
+                  >
+                    {expanded
+                      ? "Voir moins"
+                      : `Voir ${category.skills.length - VISIBLE_SKILLS} de plus`}
+                    <ChevronDown
+                      size={15}
+                      style={{
+                        transform: expanded ? "rotate(180deg)" : undefined,
+                      }}
+                    />
+                  </button>
+                )}
+              </DepthSurface>
+            </Reveal>
           );
         })}
       </div>

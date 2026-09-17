@@ -3,6 +3,12 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight, Linkedin } from "lucide-react";
+import {
+  MotionProvider,
+  MotionPreference,
+} from "@/app/components/motion/MotionProvider";
+import PageTransition from "@/app/components/motion/PageTransition";
+import MagneticLink from "@/app/components/motion/MagneticLink";
 import Navigation from "@/app/components/layout/Navigation";
 import Hero from "@/app/components/sections/Hero";
 import Skills from "@/app/components/sections/Skills";
@@ -69,7 +75,7 @@ export default function Home() {
     return () => window.removeEventListener("hashchange", syncHash);
   }, []);
   return (
-    <>
+    <MotionProvider>
       <a
         className="skip-link"
         href="#main-content"
@@ -82,24 +88,26 @@ export default function Home() {
       </a>
       <Navigation activeTab={activeTab} />
       <main ref={mainRef} id="main-content" tabIndex={-1} className="site-main">
-        {activeTab === "home" ? (
-          <Hero />
-        ) : (
-          <div className="detail-page">
-            <div className="shell detail-intro">
-              <p className="eyebrow">{headings[activeTab].index}</p>
-              <h1>{headings[activeTab].title}</h1>
-              <p>{headings[activeTab].text}</p>
+        <PageTransition pageKey={activeTab}>
+          {activeTab === "home" ? (
+            <Hero />
+          ) : (
+            <div className="detail-page">
+              <div className="shell detail-intro">
+                <p className="eyebrow">{headings[activeTab].index}</p>
+                <h1>{headings[activeTab].title}</h1>
+                <p>{headings[activeTab].text}</p>
+              </div>
+              {activeTab === "skills" && <Skills />}
+              {activeTab === "experience" && <Experience />}
+              {activeTab === "education" && <Education />}
+              {activeTab === "case-studies" && (
+                <CaseStudies activeCase={activeCase} />
+              )}
+              {activeTab === "tech-watch" && <TechWatch />}
             </div>
-            {activeTab === "skills" && <Skills />}
-            {activeTab === "experience" && <Experience />}
-            {activeTab === "education" && <Education />}
-            {activeTab === "case-studies" && (
-              <CaseStudies activeCase={activeCase} />
-            )}
-            {activeTab === "tech-watch" && <TechWatch />}
-          </div>
-        )}
+          )}
+        </PageTransition>
       </main>
       <footer className="site-footer">
         <div className="shell">
@@ -112,13 +120,13 @@ export default function Home() {
                 <span>Notre point de départ.</span>
               </h2>
             </div>
-            <a
+            <MagneticLink
               href="mailto:yacine.salah77@gmail.com"
               className="contact-circle"
-              aria-label="Écrire à Yacine Salah"
+              label="Écrire à Yacine Salah"
             >
               <ArrowUpRight size={36} />
-            </a>
+            </MagneticLink>
           </div>
           <div className="footer-bottom">
             <a className="brand footer-brand" href="#home">
@@ -134,6 +142,7 @@ export default function Home() {
               yacine.salah77@gmail.com
             </a>
             <span>Bondoufle, Île-de-France</span>
+            <MotionPreference />
             <a
               href="https://www.linkedin.com/in/yacine-salah-a0bb3176/"
               target="_blank"
@@ -145,6 +154,6 @@ export default function Home() {
           </div>
         </div>
       </footer>
-    </>
+    </MotionProvider>
   );
 }
