@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { ArrowUpRight, Menu, X } from "lucide-react";
 import type { TabType } from "@/app/types";
@@ -16,8 +16,17 @@ const tabs: { id: TabType; label: string }[] = [
 
 export default function Navigation({ activeTab }: { activeTab: TabType }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const toggleRef = useRef<HTMLButtonElement>(null);
   return (
-    <header className="site-header">
+    <header
+      className="site-header"
+      onKeyDown={(event) => {
+        if (event.key === "Escape" && menuOpen) {
+          setMenuOpen(false);
+          toggleRef.current?.focus();
+        }
+      }}
+    >
       <div className="shell header-inner">
         <a
           href="#home"
@@ -59,6 +68,7 @@ export default function Navigation({ activeTab }: { activeTab: TabType }) {
           On échange <ArrowUpRight size={16} />
         </a>
         <button
+          ref={toggleRef}
           className="menu-toggle"
           aria-label={menuOpen ? "Fermer le menu" : "Ouvrir le menu"}
           aria-expanded={menuOpen}

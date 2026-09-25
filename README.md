@@ -1,6 +1,6 @@
 # Portfolio de Yacine Salah
 
-Portfolio Next.js / React / TypeScript, conçu autour du corail `#fd5a4f`, d’un fond anthracite et d’un monogramme YS vectoriel.
+Portfolio Next.js / React / TypeScript, conçu autour du corail `#fd5a4f`, d’un fond crème et d’un monogramme YS vectoriel. La direction éditoriale associe de grands titres Bricolage Grotesque, des accents en Instrument Serif et des projets présentés comme des affiches.
 
 ## Démarrer
 
@@ -24,8 +24,9 @@ Sur un clone neuf, lancer `npm run build` avant le premier `typecheck` pour gén
 
 ## Contenu et identité
 
-- `src/app/components/sections/Hero.tsx` : accueil, expertise, projet, parcours et ressources.
-- `src/app/components/sections/PersonalProject.tsx` : présentation et lien vers Why the Blockchain, partagés entre l’accueil et la rubrique Projets.
+- `src/app/components/sections/Hero.tsx` : accueil, affiches des projets, portrait, laboratoire, parcours et ressources.
+- `src/app/components/sections/InfraPlayground.tsx` : maquette interactive Cloud / DevOps / SysOps, avec assemblage et décomposition des couches.
+- `src/app/components/sections/PersonalProject.tsx` : présentation de Why the Blockchain dans la rubrique Projets.
 - `src/app/components/sections/Experience.tsx` : expériences et dates du parcours original.
 - `src/app/components/sections/CaseStudies.tsx` : étude de cas et indicateurs du site original.
 - `src/app/components/sections/Skills.tsx` : compétences et détails dépliables.
@@ -34,6 +35,8 @@ Sur un clone neuf, lancer `npm run build` avant le premier `typecheck` pour gén
 - `src/app/globals.css` : mise en page responsive et variables graphiques.
 - `public/brand/ys-mark.svg` : logo original YS ; utilisé aussi comme favicon.
 - `public/brand/apple-touch-icon.png` : version PNG du logo.
+
+Les nouvelles polices sont servies localement depuis `src/app/fonts/`. Bricolage Grotesque et Instrument Serif proviennent du dépôt officiel Google Fonts ; leurs licences SIL Open Font License sont conservées à côté des fichiers. Les références visuelles de la refonte sont [Godly](https://godly.design/) et [Fonts In Use](https://fontsinuse.com/), sans reprise de leurs maquettes ni de leurs assets.
 
 Les données professionnelles et les chiffres de l’étude de cas proviennent du dépôt existant ; ils n’ont pas été actualisés ou vérifiés auprès de Yacine pendant cette refonte. La veille est une sélection de liens vers les sources, sans flux automatique ni faux articles datés.
 
@@ -45,11 +48,11 @@ Les six rubriques utilisent des fragments d’URL (`#home`, `#skills`, `#experie
 
 ## Motion design
 
-Le mouvement reste ponctuel : portrait en perspective avec reflet au pointeur, profondeur légère sur les cartes, parallaxe limitée au portrait, apparitions uniques au scroll et transitions entre rubriques. Les durées et ressorts sont centralisés dans `src/app/lib/motion.ts` ; les composants réutilisables se trouvent dans `src/app/components/motion/`.
+Le mouvement accompagne l’exploration : modèle d’infrastructure en perspective qui suit le pointeur, assemblage des couches, profondeur légère sur les affiches, parallaxe limitée au titre de l’accueil, apparitions uniques au scroll et transitions entre rubriques. Les durées et ressorts sont centralisés dans `src/app/lib/motion.ts` ; les composants réutilisables se trouvent dans `src/app/components/motion/`.
 
 Motion utilise `LazyMotion` avec les seules fonctionnalités nécessaires. Aucun moteur WebGL, curseur de remplacement, scroll forcé ou animation décorative en boucle. Les suivis du pointeur utilisent des valeurs animées sans rendu React à chaque image. Ils sont désactivés sur les écrans tactiles et les appareils à faible nombre de cœurs.
 
-Le contenu est visible dans le HTML initial. Les éléments révélés au scroll deviennent immédiatement visibles s’ils reçoivent le focus au clavier. `prefers-reduced-motion` désactive les mouvements, y compris lors d’un changement de préférence pendant la visite. Le bouton en pied de page permet de mettre les animations en pause ; ce choix est mémorisé localement et la préférence système reste prioritaire.
+Le contenu est visible dans le HTML initial. Les éléments révélés au scroll deviennent immédiatement visibles s’ils reçoivent le focus au clavier. `prefers-reduced-motion` désactive les mouvements, y compris lors d’un changement de préférence pendant la visite. Les sélecteurs de discipline, l’assemblage des couches et le mini-lab restent utilisables, avec des changements instantanés. Le bouton en pied de page permet de mettre les animations en pause ; ce choix est mémorisé localement et la préférence système reste prioritaire. Le menu mobile se ferme après navigation et avec Échap, qui rend le focus au bouton du menu.
 
 ## Déploiement
 
