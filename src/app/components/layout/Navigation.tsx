@@ -42,7 +42,8 @@ export default function Navigation({ activeTab }: { activeTab: TabType }) {
             priority
           />
           <span>
-            YACINE SALAH<span className="brand-caption">CLOUD & DEVOPS</span>
+            YACINE SALAH
+            <span className="brand-caption">INFRASTRUCTURE & CLOUD</span>
           </span>
         </a>
         <nav
@@ -65,7 +66,7 @@ export default function Navigation({ activeTab }: { activeTab: TabType }) {
           </a>
         </nav>
         <a className="header-contact" href="mailto:yacine.salah77@gmail.com">
-          On échange <ArrowUpRight size={16} />
+          Contact <ArrowUpRight size={16} />
         </a>
         <button
           ref={toggleRef}

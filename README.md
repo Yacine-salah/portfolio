@@ -1,6 +1,6 @@
 # Portfolio de Yacine Salah
 
-Portfolio Next.js / React / TypeScript, conçu autour du corail `#fd5a4f`, d’un fond crème et d’un monogramme YS vectoriel. La direction éditoriale associe de grands titres Bricolage Grotesque, des accents en Instrument Serif et des projets présentés comme des affiches.
+Portfolio Next.js / React / TypeScript autour de l’architecture des infrastructures et du cloud. Fond anthracite, accent corail `#fd5a4f`, titres Barlow Condensed, texte Geist et annotations monospaces. Le portrait apparaît dès l’accueil.
 
 ## Démarrer
 
@@ -24,8 +24,8 @@ Sur un clone neuf, lancer `npm run build` avant le premier `typecheck` pour gén
 
 ## Contenu et identité
 
-- `src/app/components/sections/Hero.tsx` : accueil, affiches des projets, portrait, laboratoire, parcours et ressources.
-- `src/app/components/sections/InfraPlayground.tsx` : maquette interactive Cloud / DevOps / SysOps, avec assemblage et décomposition des couches.
+- `src/app/components/sections/Hero.tsx` : accueil, portrait, projets d’infrastructure, laboratoire, parcours et ressources.
+- `src/app/components/sections/ArchitectureExplorer.tsx` : schémas de principe Ansible, cloud hybride et observabilité ; sélection des composants et explications accessibles au clavier.
 - `src/app/components/sections/PersonalProject.tsx` : présentation de Why the Blockchain dans la rubrique Projets.
 - `src/app/components/sections/Experience.tsx` : expériences et dates du parcours original.
 - `src/app/components/sections/CaseStudies.tsx` : étude de cas et indicateurs du site original.
@@ -36,7 +36,9 @@ Sur un clone neuf, lancer `npm run build` avant le premier `typecheck` pour gén
 - `public/brand/ys-mark.svg` : logo original YS ; utilisé aussi comme favicon.
 - `public/brand/apple-touch-icon.png` : version PNG du logo.
 
-Les nouvelles polices sont servies localement depuis `src/app/fonts/`. Bricolage Grotesque et Instrument Serif proviennent du dépôt officiel Google Fonts ; leurs licences SIL Open Font License sont conservées à côté des fichiers. Les références visuelles de la refonte sont [Godly](https://godly.design/) et [Fonts In Use](https://fontsinuse.com/), sans reprise de leurs maquettes ni de leurs assets.
+Barlow Condensed est servie localement depuis `src/app/fonts/`, avec sa licence OFL provenant du dépôt officiel Google Fonts. Les références observées dans les tendances [Godly](https://godly.design/) sont [Gitnimble](https://godly.design/website/gitnimble/) (tracés techniques), [Superpower](https://godly.design/website/superpower/) (place de la photographie) et [Paradigm](https://godly.design/website/paradigmai/) (hiérarchie des sections). Le code et les schémas sont propres au portfolio.
+
+`public/images/yacine-portrait-studio.png` est un portrait généré avec imagegen à partir de la photo existante, à la demande de Yacine. Le fichier source `photo-profil.png` est conservé. Le portrait généré a été inspecté puis intégré avec Next Image pour la livraison de tailles adaptées.
 
 Les données professionnelles et les chiffres de l’étude de cas proviennent du dépôt existant ; ils n’ont pas été actualisés ou vérifiés auprès de Yacine pendant cette refonte. La veille est une sélection de liens vers les sources, sans flux automatique ni faux articles datés.
 
@@ -48,11 +50,11 @@ Les six rubriques utilisent des fragments d’URL (`#home`, `#skills`, `#experie
 
 ## Motion design
 
-Le mouvement accompagne l’exploration : modèle d’infrastructure en perspective qui suit le pointeur, assemblage des couches, profondeur légère sur les affiches, parallaxe limitée au titre de l’accueil, apparitions uniques au scroll et transitions entre rubriques. Les durées et ressorts sont centralisés dans `src/app/lib/motion.ts` ; les composants réutilisables se trouvent dans `src/app/components/motion/`.
+Le mouvement accompagne l’exploration : profondeur légère sur le portrait et certaines surfaces, surbrillance des connexions du schéma, apparitions au défilement et transitions entre rubriques. Les schémas pédagogiques ne représentent pas des mesures en direct ni une documentation exacte des infrastructures des entreprises. Les durées et ressorts sont centralisés dans `src/app/lib/motion.ts` ; les composants réutilisables se trouvent dans `src/app/components/motion/`.
 
 Motion utilise `LazyMotion` avec les seules fonctionnalités nécessaires. Aucun moteur WebGL, curseur de remplacement, scroll forcé ou animation décorative en boucle. Les suivis du pointeur utilisent des valeurs animées sans rendu React à chaque image. Ils sont désactivés sur les écrans tactiles et les appareils à faible nombre de cœurs.
 
-Le contenu est visible dans le HTML initial. Les éléments révélés au scroll deviennent immédiatement visibles s’ils reçoivent le focus au clavier. `prefers-reduced-motion` désactive les mouvements, y compris lors d’un changement de préférence pendant la visite. Les sélecteurs de discipline, l’assemblage des couches et le mini-lab restent utilisables, avec des changements instantanés. Le bouton en pied de page permet de mettre les animations en pause ; ce choix est mémorisé localement et la préférence système reste prioritaire. Le menu mobile se ferme après navigation et avec Échap, qui rend le focus au bouton du menu.
+Le contenu est visible dans le HTML initial. Les éléments révélés au scroll deviennent immédiatement visibles s’ils reçoivent le focus au clavier. `prefers-reduced-motion` désactive les mouvements, y compris lors d’un changement de préférence pendant la visite. La sélection des architectures et des composants ainsi que le mini-lab restent utilisables, avec des changements instantanés. Le bouton en pied de page permet de mettre les animations en pause ; ce choix est mémorisé localement et la préférence système reste prioritaire. Le menu mobile se ferme après navigation et avec Échap, qui rend le focus au bouton du menu.
 
 ## Déploiement
 

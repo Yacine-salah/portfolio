@@ -1,429 +1,399 @@
 "use client";
-import { useRef } from "react";
+import { useState } from "react";
 import Image from "next/image";
-import { m, useScroll, useTransform } from "motion/react";
 import {
   ArrowDown,
   ArrowRight,
   ArrowUpRight,
-  Asterisk,
   BookOpen,
+  ChevronDown,
+  Cloud,
+  Code2,
+  GitBranch,
   MapPin,
-  Plus,
+  Network,
+  Terminal,
 } from "lucide-react";
 import Reveal from "../motion/Reveal";
 import DepthSurface from "../motion/DepthSurface";
 import MagneticLink from "../motion/MagneticLink";
 import { useMotionSettings } from "../motion/MotionProvider";
-import InfraPlayground from "./InfraPlayground";
+import ArchitectureExplorer from "./ArchitectureExplorer";
 import AnsibleDemo from "./AnsibleDemo";
 
+const projects = [
+  {
+    index: "01",
+    company: "THALES",
+    title: "Automatiser une infrastructure de contrôle aérien.",
+    description:
+      "Développement d’une solution full Ansible pour gérer l’infrastructure des contrôleurs aériens, au sein d’une équipe de quatre personnes.",
+    tags: ["Ansible", "SysOps", "Équipe de 4"],
+    href: "#case-studies/thales",
+    icon: Network,
+  },
+  {
+    index: "02",
+    company: "CARREFOUR",
+    title: "Faire évoluer un CRM vers le cloud hybride.",
+    description:
+      "Migration depuis une infrastructure on-premise vers GCP et OCI. Infrastructure as Code, chaîne CI/CD et accompagnement de la mise en production.",
+    tags: ["GCP / OCI", "Terraform", "GitLab CI/CD"],
+    href: "#case-studies/crm",
+    icon: Cloud,
+  },
+];
 const career = [
   {
     company: "Thales",
     role: "Ingénieur SysOps",
-    detail: "Automatisation Ansible · équipe de 4",
-    current: true,
+    scope: "Automatisation des infrastructures",
+    tech: "ANSIBLE",
   },
   {
     company: "Servier",
     role: "Ingénieur Cloud / DataOps",
-    detail: "GCP · Infrastructure as Code · observabilité",
+    scope: "Cloud, observabilité et intégrations",
+    tech: "GCP / PYTHON",
   },
   {
     company: "Carrefour",
     role: "Ingénieur Cloud DevOps",
-    detail: "Cloud hybride · CI/CD · release management",
+    scope: "Migration hybride et livraison",
+    tech: "GCP / OCI",
   },
   {
     company: "BNP Paribas",
     role: "Chef de projet technique",
-    detail: "Coordination technique · production",
+    scope: "Coordination et mise en production",
+    tech: "PRODUCTION",
   },
 ];
+
 export default function Hero() {
-  const heroRef = useRef<HTMLElement>(null);
   const { enabled } = useMotionSettings();
-  const { scrollYProgress } = useScroll({
-    target: heroRef,
-    offset: ["start start", "end start"],
-  });
-  const titleY = useTransform(scrollYProgress, [0, 1], [0, -35]);
-  const stampRotate = useTransform(scrollYProgress, [0, 1], [-10, 32]);
+  const [labOpen, setLabOpen] = useState(false);
   return (
     <>
-      <section
-        className="hero shell"
-        ref={heroRef}
-        aria-labelledby="hero-title"
-      >
-        <div className="hero-topline">
-          <p className="eyebrow">
-            YACINE SALAH — INGÉNIEUR CLOUD, DEVOPS & SYSOPS
-          </p>
-          <span className="hero-edition">PORTFOLIO / 2026</span>
+      <section id="home" className="hero shell" aria-labelledby="hero-title">
+        <div className="hero-grid-lines" aria-hidden="true">
+          <span />
+          <span />
+          <span />
         </div>
         <div className="hero-layout">
           <div className="hero-copy">
-            <m.h1 id="hero-title" style={{ y: enabled ? titleY : 0 }}>
-              DU CODE.
+            <p className="eyebrow hero-eyebrow">
+              <span className="coral-square" /> YACINE SALAH / INGÉNIEUR
+            </p>
+            <h1 id="hero-title">
+              INFRASTRUCTURE
               <br />
-              <em>au concret.</em>
-              <span className="title-period" aria-hidden="true">
-                *
-              </span>
-            </m.h1>
-            <div className="hero-introduction">
-              <span className="intro-line" aria-hidden="true" />
-              <p>
-                Les bonnes idées méritent
-                <br />
-                des <strong>infrastructures qui tiennent.</strong>
-                <br />
-                Je construis le lien entre les deux.
-              </p>
-            </div>
+              <span className="hero-amp">&</span> <span>CLOUD</span>
+              <span className="hero-period">.</span>
+            </h1>
+            <p className="hero-specialty">
+              Architecture · Automatisation · Production
+            </p>
+            <p className="hero-description">
+              Ingénieur SysOps chez <strong>Thales</strong>. Je conçois,
+              automatise et exploite des infrastructures, des systèmes critiques
+              aux plateformes cloud GCP et OCI.
+            </p>
             <div className="hero-actions">
               <MagneticLink
                 href="#case-studies"
                 className="button button-primary"
               >
-                Explorer mes projets <ArrowUpRight size={18} />
+                Voir mes projets <ArrowUpRight size={17} />
               </MagneticLink>
               <a href="mailto:yacine.salah77@gmail.com" className="text-link">
-                Faisons connaissance <ArrowUpRight size={17} />
+                Me contacter <ArrowUpRight size={16} />
               </a>
             </div>
-            <div className="hero-note">
-              <m.span
-                className="hero-stamp"
-                style={{ rotate: enabled ? stampRotate : -10 }}
-                aria-hidden="true"
-              >
-                <Asterisk size={27} />
-                <span>
-                  MADE OF
-                  <br />
-                  CODE & CAFÉ
-                </span>
-              </m.span>
+            <div className="hero-context">
               <span>
-                De la curiosité.
-                <br />
-                Du collectif. Et du concret.
+                <MapPin size={12} /> Bondoufle, France
               </span>
+              <span className="hero-divider" />
+              <span>Cloud · DevOps · SysOps</span>
             </div>
           </div>
-          <InfraPlayground />
+          <figure className="profile-figure">
+            <DepthSurface className="profile-photo">
+              <Image
+                src="/images/yacine-portrait-studio.png"
+                alt="Portrait professionnel de Yacine Salah"
+                width={1122}
+                height={1402}
+                priority
+                sizes="(max-width: 700px) 82vw, (max-width: 1100px) 36vw, 390px"
+              />
+              <span className="profile-corner corner-tl" />
+              <span className="profile-corner corner-tr" />
+              <span className="profile-corner corner-bl" />
+              <span className="profile-corner corner-br" />
+            </DepthSurface>
+            <figcaption>
+              <strong>Yacine Salah</strong>
+              <span>INGÉNIEUR SYSOPS — THALES</span>
+            </figcaption>
+            <span className="profile-edge-label" aria-hidden="true">
+              INFRASTRUCTURE / CLOUD / AUTOMATION
+            </span>
+          </figure>
         </div>
         <div className="hero-bottom">
-          <span>
-            <MapPin size={13} /> BONDOUFLE, FRANCE
+          <span className="hero-stack">
+            GCP <i>/</i> OCI <i>/</i> ANSIBLE <i>/</i> TERRAFORM <i>/</i>{" "}
+            KUBERNETES
           </span>
           <button
             onClick={() =>
               document
-                .getElementById("selected-work")
+                .getElementById("architecture")
                 ?.scrollIntoView({ behavior: enabled ? "smooth" : "instant" })
             }
           >
-            LA SUITE, PAR ICI <ArrowDown size={17} />
+            EXPLORER L’ARCHITECTURE <ArrowDown size={15} />
           </button>
-          <span>CONCEVOIR. AUTOMATISER. FIABILISER.</span>
         </div>
       </section>
-      <div className="company-strip">
-        <div className="shell company-inner">
-          <p>
-            UNE EXPÉRIENCE
-            <br />
-            <span>CONSTRUITE CHEZ</span>
-          </p>
-          <span>THALES</span>
-          <span className="company-servier">Servier.</span>
-          <span>Carrefour</span>
-          <span className="company-bnp">BNP PARIBAS</span>
-          <span>Orange</span>
-        </div>
-      </div>
       <section
-        className="shell work-section section-space"
-        id="selected-work"
-        aria-labelledby="work-title"
+        className="architecture-section shell section-space"
+        id="architecture"
+        aria-labelledby="architecture-title"
       >
         <Reveal className="section-heading">
           <div>
-            <p className="eyebrow">01 / QUELQUES TERRAINS DE JEU</p>
-            <h2 id="work-title">
-              Du sérieux.
-              <br />
-              <em>Jamais ennuyeux.</em>
-            </h2>
+            <p className="eyebrow">ARCHITECTURE / VUE D’ENSEMBLE</p>
+            <h2 id="architecture-title">Les systèmes, de l’intérieur.</h2>
           </div>
           <p className="section-aside">
-            Des systèmes critiques aux projets personnels.
+            Trois approches issues de mon parcours.
             <br />
-            Trois façons de transformer une idée.
+            Sélectionnez un composant pour l’explorer.
           </p>
         </Reveal>
-        <div className="project-gallery">
-          <Reveal className="project-main">
-            <DepthSurface
-              as="a"
-              href="#case-studies/thales"
-              className="project-poster poster-thales"
-              aria-label="Découvrir le projet Thales : infrastructure full Ansible"
-            >
-              <div className="poster-top">
-                <span>01 / THALES</span>
-                <ArrowUpRight size={25} />
-              </div>
-              <div className="thales-art" aria-hidden="true">
-                <span className="poster-big-type">
-                  PLAY.
-                  <br />
-                  BOOK.
-                  <br />
-                  <span>REPEAT.</span>
-                </span>
-                <div className="orbit-symbol">
-                  <span />
-                  <span />
-                  <span />
-                  <Asterisk size={88} strokeWidth={1} />
-                </div>
-                <span className="art-label">
-                  HUMAN TEAM.
-                  <br />
-                  AUTOMATED SYSTEMS.
-                </span>
-              </div>
-              <div className="poster-bottom">
-                <div>
-                  <span className="poster-category">
-                    SYSOPS / AUTOMATISATION
-                  </span>
-                  <h3>
-                    Une infrastructure.
-                    <br />
-                    Toute la force d’Ansible.
-                  </h3>
-                </div>
-                <span className="poster-count">
-                  4<span>PERSONNES</span>
-                </span>
-              </div>
-              <p className="poster-description">
-                Une solution full Ansible pour l’infrastructure des contrôleurs
-                aériens, développée en équipe.
-              </p>
-            </DepthSurface>
-          </Reveal>
-          <Reveal className="project-secondary" delay={1}>
-            <DepthSurface
-              as="a"
-              href="#case-studies/crm"
-              className="project-poster poster-cloud"
-              aria-label="Découvrir le projet Carrefour : migration CRM vers GCP et OCI"
-            >
-              <div className="poster-top">
-                <span>02 / CARREFOUR</span>
-                <ArrowUpRight size={25} />
-              </div>
-              <div className="cloud-art" aria-hidden="true">
-                <span className="cloud-node">GCP</span>
-                <span className="cloud-connection">
-                  <Plus size={27} />
-                </span>
-                <span className="cloud-node">OCI</span>
-              </div>
-              <div className="poster-bottom">
-                <div>
-                  <span className="poster-category">CLOUD HYBRIDE / CI/CD</span>
-                  <h3>
-                    Un CRM.
-                    <br />
-                    Un nouvel horizon.
-                  </h3>
-                </div>
-                <span className="project-circle">
-                  <ArrowRight size={22} />
-                </span>
-              </div>
-            </DepthSurface>
-          </Reveal>
-          <Reveal className="project-personal" delay={2}>
-            <DepthSurface
-              as="a"
-              href="https://whytheblockchain.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="project-poster poster-blockchain"
-              aria-label="Découvrir Why the Blockchain — nouvel onglet"
-            >
-              <div className="poster-top">
-                <span>03 / PROJET PERSONNEL</span>
-                <ArrowUpRight size={25} />
-              </div>
-              <div className="blockchain-art" aria-hidden="true">
-                <span>
-                  WHY<span className="why-star">*</span>
-                </span>
-                <em>the blockchain?</em>
-              </div>
-              <div className="poster-bottom">
-                <h3>La curiosité se partage.</h3>
-                <span className="poster-category">WEB3 / TRANSMISSION</span>
-              </div>
-            </DepthSurface>
-          </Reveal>
-        </div>
-        <a href="#case-studies" className="work-all-link">
-          Les coulisses des projets <ArrowUpRight size={19} />
-        </a>
-      </section>
-      <section className="about-section" aria-labelledby="about-title">
-        <div className="shell about-grid">
-          <Reveal className="about-portrait">
-            <div className="portrait-paper">
-              <p className="eyebrow">L’HUMAIN DERRIÈRE LE CODE</p>
-              <Image
-                src="/images/photo-profil.png"
-                alt="Yacine Salah"
-                width={299}
-                height={358}
-                sizes="(max-width: 760px) 260px, 330px"
-              />
-              <span className="portrait-signature">Yacine.</span>
-              <span className="portrait-pin" aria-hidden="true">
-                +
-              </span>
-            </div>
-            <span className="portrait-caption">
-              INGÉNIEUR. CURIEUX. TOUJOURS EN MOUVEMENT.
-            </span>
-          </Reveal>
-          <Reveal className="about-copy">
-            <p className="eyebrow">02 / MA FAÇON DE FAIRE</p>
-            <h2 id="about-title">
-              La tête dans
-              <br />
-              le cloud.
-              <br />
-              <em>Les pieds sur terre.</em>
-            </h2>
-            <p>
-              Je suis Yacine. J’aime comprendre les systèmes, simplifier ce qui
-              se répète et construire avec les autres. Mon terrain : le cloud,
-              l’automatisation et les environnements de production.
-            </p>
-            <div className="about-principles">
-              <span>
-                <span>01</span>Concevoir pour durer.
-              </span>
-              <span>
-                <span>02</span>Automatiser avec méthode.
-              </span>
-              <span>
-                <span>03</span>Transmettre pour avancer.
-              </span>
-            </div>
-            <a href="#skills" className="text-link">
-              Découvrir mes outils <ArrowUpRight size={19} />
-            </a>
-          </Reveal>
-        </div>
-      </section>
-      <section
-        className="shell lab-section section-space"
-        aria-labelledby="lab-title"
-      >
-        <Reveal className="lab-copy">
-          <p className="eyebrow">03 / UN PEU DE PRATIQUE</p>
-          <h2 id="lab-title">
-            Moins de clics.
-            <br />
-            <em>Plus de maîtrise.</em>
-          </h2>
-          <p>
-            L’automatisation, c’est aussi savoir ne rien changer quand tout est
-            déjà conforme. Lancez ce mini-scénario Ansible, puis relancez-le :
-            la différence est là.
-          </p>
-          <span className="lab-handnote">
-            À vous de jouer <ArrowUpRight size={30} strokeWidth={1} />
-          </span>
-        </Reveal>
-        <Reveal delay={1}>
-          <AnsibleDemo />
+        <Reveal>
+          <ArchitectureExplorer />
         </Reveal>
       </section>
-      <section className="career-section" aria-labelledby="career-title">
+      <section className="projects-section" aria-labelledby="projects-title">
         <div className="shell section-space">
           <Reveal className="section-heading">
             <div>
-              <p className="eyebrow">04 / LE PARCOURS</p>
-              <h2 id="career-title">
-                Différents univers.
-                <br />
-                <em>Le même engagement.</em>
-              </h2>
+              <p className="eyebrow">PROJETS SÉLECTIONNÉS</p>
+              <h2 id="projects-title">Du code à l’infrastructure.</h2>
             </div>
-            <a href="#experience" className="text-link">
-              Le parcours complet <ArrowUpRight size={18} />
+            <a href="#case-studies" className="text-link">
+              Toutes les études de cas <ArrowUpRight size={17} />
             </a>
           </Reveal>
-          <div className="career-list">
-            {career.map((item, index) => (
-              <Reveal key={item.company}>
-                <a href="#experience" className="career-row">
-                  <span className="career-index">0{index + 1}</span>
-                  <h3>
-                    {item.company}
-                    {item.current && (
-                      <span className="career-current">EN POSTE</span>
-                    )}
-                  </h3>
-                  <div>
-                    <h4>{item.role}</h4>
-                    <p>{item.detail}</p>
+          <div className="project-list">
+            {projects.map((project) => (
+              <Reveal key={project.company}>
+                <a href={project.href} className="engineering-project">
+                  <div className="project-identity">
+                    <span className="project-index">/{project.index}</span>
+                    <span>{project.company}</span>
+                    <project.icon size={58} strokeWidth={0.8} />
                   </div>
-                  <ArrowUpRight size={24} />
+                  <div className="project-summary">
+                    <h3>{project.title}</h3>
+                    <p>{project.description}</p>
+                    <div className="project-tags">
+                      {project.tags.map((tag) => (
+                        <span key={tag}>{tag}</span>
+                      ))}
+                    </div>
+                  </div>
+                  <span className="project-open">
+                    <ArrowUpRight size={23} />
+                    <span>ÉTUDE DE CAS</span>
+                  </span>
                 </a>
               </Reveal>
             ))}
           </div>
+          <Reveal>
+            <a
+              className="blockchain-project"
+              href="https://whytheblockchain.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <div className="chain-mark" aria-hidden="true">
+                <span />
+                <span />
+                <span />
+              </div>
+              <div>
+                <p className="eyebrow">PROJET PERSONNEL</p>
+                <h3>Why the Blockchain</h3>
+                <p>
+                  Mon site pour comprendre la blockchain, les cryptomonnaies et
+                  le Web3.
+                </p>
+              </div>
+              <span className="blockchain-link">
+                whytheblockchain.com <ArrowUpRight size={20} />
+                <span className="sr-only"> — nouvel onglet</span>
+              </span>
+            </a>
+          </Reveal>
         </div>
       </section>
       <section
-        className="shell knowledge-section section-space"
-        aria-labelledby="knowledge-title"
+        className="shell practice-section section-space"
+        aria-labelledby="practice-title"
       >
-        <Reveal>
-          <p className="eyebrow">05 / LA CURIOSITÉ, ÇA S’ENTRETIENT</p>
-          <h2 id="knowledge-title">
-            Toujours
+        <Reveal className="practice-copy">
+          <p className="eyebrow">MÉTHODE DE TRAVAIL</p>
+          <h2 id="practice-title">
+            Concevoir.
             <br />
-            <em>en exploration.</em>
+            Automatiser.
+            <br />
+            <span>Exploiter.</span>
           </h2>
-          <p>
-            Lire, écrire, expérimenter.
-            <br />
-            Et faire circuler ce qu’on apprend.
-          </p>
+          <a href="#skills" className="text-link">
+            Mon environnement technique <ArrowUpRight size={17} />
+          </a>
         </Reveal>
+        <div className="practice-details">
+          <Reveal>
+            <article>
+              <span>01</span>
+              <div>
+                <h3>Penser l’architecture</h3>
+                <p>
+                  Comprendre les contraintes, les dépendances et les usages
+                  avant de choisir les services. GCP, OCI et systèmes existants
+                  font partie du même ensemble.
+                </p>
+              </div>
+              <Cloud size={20} />
+            </article>
+          </Reveal>
+          <Reveal>
+            <article>
+              <span>02</span>
+              <div>
+                <h3>Décrire l’infrastructure dans le code</h3>
+                <p>
+                  Utiliser Ansible et Terraform pour rendre les changements
+                  reproductibles. Versionner, relire et intégrer les
+                  déploiements dans une chaîne CI/CD.
+                </p>
+              </div>
+              <GitBranch size={20} />
+            </article>
+          </Reveal>
+          <Reveal>
+            <article>
+              <span>03</span>
+              <div>
+                <h3>Préparer la production</h3>
+                <p>
+                  Relier logs, supervision et alertes aux pratiques des équipes.
+                  Documenter les choix pour faciliter l’exploitation et la
+                  transmission.
+                </p>
+              </div>
+              <Terminal size={20} />
+            </article>
+          </Reveal>
+        </div>
+      </section>
+      <section className="lab-section shell" aria-label="Démonstration Ansible">
+        <button
+          className="lab-toggle"
+          aria-expanded={labOpen}
+          aria-controls="ansible-lab"
+          onClick={() => setLabOpen(!labOpen)}
+        >
+          <span className="lab-toggle-icon">
+            <Code2 size={22} />
+          </span>
+          <span>
+            <strong>Pourquoi relancer un playbook ne change pas tout ?</strong>
+            <small>Explorer l’idempotence avec une simulation Ansible.</small>
+          </span>
+          <span className="lab-toggle-action">
+            {labOpen ? "FERMER" : "OUVRIR LE LAB"}
+            <ChevronDown size={17} />
+          </span>
+        </button>
+        {labOpen && (
+          <div id="ansible-lab" className="lab-content">
+            <div>
+              <p className="eyebrow">ANSIBLE / IDEMPOTENCE</p>
+              <h3>
+                Un état attendu.
+                <br />
+                Seulement les changements nécessaires.
+              </h3>
+              <p>
+                Au premier passage, la configuration est appliquée. À la
+                relance, le système est déjà conforme : aucune modification
+                supplémentaire.
+              </p>
+            </div>
+            <AnsibleDemo />
+          </div>
+        )}
+      </section>
+      <section
+        className="shell career-section section-space"
+        aria-labelledby="career-title"
+      >
+        <Reveal className="section-heading">
+          <div>
+            <p className="eyebrow">PARCOURS</p>
+            <h2 id="career-title">Des environnements exigeants.</h2>
+          </div>
+          <a href="#experience" className="text-link">
+            Détail des missions <ArrowUpRight size={17} />
+          </a>
+        </Reveal>
+        <div className="career-list">
+          {career.map((item, index) => (
+            <Reveal key={item.company}>
+              <a className="career-row" href="#experience">
+                <span className="career-index">0{index + 1}</span>
+                <h3>{item.company}</h3>
+                <div>
+                  <h4>{item.role}</h4>
+                  <p>{item.scope}</p>
+                </div>
+                <span className="career-tech">{item.tech}</span>
+                <ArrowUpRight size={20} />
+              </a>
+            </Reveal>
+          ))}
+        </div>
+      </section>
+      <section
+        className="knowledge-section shell"
+        aria-labelledby="resources-title"
+      >
+        <div>
+          <p className="eyebrow">ÉCRIRE & APPRENDRE</p>
+          <h2 id="resources-title">Notes de terrain.</h2>
+        </div>
         <div className="knowledge-links">
           <a
             href="https://www.amazon.fr/dp/B0CGWN1PCK"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <BookOpen size={24} />
+            <BookOpen size={21} />
             <span>
               <strong>Mon livre DevOps</strong>
-              <small>Du terrain aux pages · Amazon</small>
+              <small>Retours de pratique · Amazon</small>
             </span>
-            <ArrowUpRight size={23} />
+            <ArrowUpRight size={18} />
             <span className="sr-only">Nouvel onglet</span>
           </a>
           <a
@@ -431,21 +401,21 @@ export default function Hero() {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <span className="knowledge-number">G</span>
+            <Cloud size={21} />
             <span>
-              <strong>Apprendre, encore.</strong>
-              <small>Mon parcours Google Skills</small>
+              <strong>Google Skills</strong>
+              <small>Formations et badges</small>
             </span>
-            <ArrowUpRight size={23} />
+            <ArrowUpRight size={18} />
             <span className="sr-only">Nouvel onglet</span>
           </a>
           <a href="#tech-watch">
-            <Asterisk size={27} />
+            <ArrowRight size={21} />
             <span>
-              <strong>Garder un temps d’avance.</strong>
-              <small>Mes sources de veille</small>
+              <strong>Veille technique</strong>
+              <small>Cloud, DevOps, automatisation</small>
             </span>
-            <ArrowUpRight size={23} />
+            <ArrowUpRight size={18} />
           </a>
         </div>
       </section>

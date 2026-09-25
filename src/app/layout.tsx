@@ -13,17 +13,10 @@ const mono = localFont({
   display: "swap",
 });
 const display = localFont({
-  src: "./fonts/BricolageGrotesque.ttf",
+  src: "./fonts/BarlowCondensed-SemiBold.ttf",
   variable: "--font-display",
   display: "swap",
-  weight: "200 800",
-});
-const editorial = localFont({
-  src: "./fonts/InstrumentSerif-Italic.ttf",
-  variable: "--font-editorial",
-  display: "swap",
-  weight: "400",
-  style: "italic",
+  weight: "600",
 });
 
 export const metadata: Metadata = {
@@ -32,7 +25,7 @@ export const metadata: Metadata = {
     "Ingénieur Cloud, DevOps et SysOps à Bondoufle. Automatisation Ansible, architecture GCP et OCI, Terraform, Kubernetes et observabilité. Découvrez mon parcours et mes projets.",
   icons: { icon: "/brand/ys-mark.svg", apple: "/brand/apple-touch-icon.png" },
   openGraph: {
-    title: "Yacine Salah — Du code au concret.",
+    title: "Yacine Salah — Infrastructure & Cloud",
     description:
       "Des infrastructures fiables, des déploiements automatisés et une culture de la production.",
     locale: "fr_FR",
@@ -46,7 +39,7 @@ export default function RootLayout({
   return (
     <html lang="fr">
       <body
-        className={`${geist.variable} ${mono.variable} ${display.variable} ${editorial.variable}`}
+        className={`${geist.variable} ${mono.variable} ${display.variable}`}
       >
         {children}
       </body>

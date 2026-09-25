@@ -32,27 +32,27 @@ const headings: Record<
 > = {
   skills: {
     index: "01 / EXPERTISE",
-    title: "Les outils. Et la maîtrise.",
+    title: "Expertise technique.",
     text: "Du système à la plateforme cloud, les technologies avec lesquelles je construis et fais évoluer les infrastructures.",
   },
   experience: {
     index: "02 / PARCOURS",
-    title: "Une culture du terrain.",
+    title: "Expériences en production.",
     text: "Des systèmes critiques aux plateformes cloud : un parcours au croisement de la technique, des équipes et de la production.",
   },
   "case-studies": {
     index: "03 / PROJETS",
-    title: "De la complexité au concret.",
+    title: "Projets d’infrastructure.",
     text: "Un regard sur les enjeux, les choix techniques et les résultats de mes projets.",
   },
   education: {
     index: "04 / FORMATION",
-    title: "Apprendre. Puis aller plus loin.",
+    title: "Formation & apprentissage.",
     text: "Des bases solides en systèmes et réseaux, enrichies par une pratique continue du cloud.",
   },
   "tech-watch": {
     index: "05 / VEILLE",
-    title: "Toujours en mouvement.",
+    title: "Veille technique.",
     text: "Mes sources pour suivre les évolutions du cloud, du DevOps et de l’automatisation.",
   },
 };
@@ -113,11 +113,11 @@ export default function Home() {
         <div className="shell">
           <div className="footer-top">
             <div>
-              <p className="eyebrow">ET SI ON CONSTRUISAIT LA SUITE ?</p>
+              <p className="eyebrow">CONTACT / YACINE SALAH</p>
               <h2>
-                Votre prochain défi.
+                Parlons de votre
                 <br />
-                <span>Notre point de départ.</span>
+                <span>architecture.</span>
               </h2>
             </div>
             <MagneticLink
