@@ -1,52 +1,25 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Check, Play, RotateCcw, Terminal } from "lucide-react";
-
-const steps = [
-  "Lire l’inventaire de démonstration",
-  "Préparer la configuration",
-  "Appliquer les tâches",
-  "Contrôler l’état attendu",
-];
+import { useReducer } from "react";
+import {
+  ArrowRight,
+  Check,
+  Eye,
+  Play,
+  Power,
+  RotateCcw,
+  Server,
+  Terminal,
+} from "lucide-react";
+import { createLabState, isCompliant, labReducer } from "@/app/lib/ansible-lab";
 
 export default function AnsibleDemo() {
-  const [ready, setReady] = useState(false);
-  const [progress, setProgress] = useState(0);
-  const [running, setRunning] = useState(false);
-  const [configured, setConfigured] = useState(false);
-  const [repeatRun, setRepeatRun] = useState(false);
-  const complete = progress === steps.length;
-
-  useEffect(() => {
-    setReady(true);
-  }, []);
-
-  useEffect(() => {
-    if (!running) return;
-    const timer = window.setInterval(() => {
-      setProgress((value) => Math.min(value + 1, steps.length));
-    }, 650);
-    return () => window.clearInterval(timer);
-  }, [running]);
-
-  useEffect(() => {
-    if (running && complete) {
-      setRunning(false);
-      setConfigured(true);
-    }
-  }, [complete, running]);
-
-  const launch = () => {
-    setRepeatRun(configured);
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      setProgress(steps.length);
-      setConfigured(true);
-      return;
-    }
-    setProgress(0);
-    setRunning(true);
-  };
+  const [state, dispatch] = useReducer(labReducer, undefined, createLabState);
+  const compliant = state.hosts.filter(isCompliant).length;
+  const report = state.report;
+  const canStopService = state.hosts.find(
+    (host) => host.name === "app-02",
+  )?.service;
 
   return (
     <div
@@ -54,77 +27,147 @@ export default function AnsibleDemo() {
       aria-label="Démonstration interactive d’automatisation"
     >
       <div className="demo-header">
-        <Terminal size={17} />
-        <span>LE MINI-LAB ANSIBLE</span>
-        <span className="demo-pill">DÉMO</span>
+        <Terminal size={17} aria-hidden="true" />
+        <span>ANSIBLE / MISE EN CONFORMITÉ</span>
+        <span className="demo-pill">SIMULATION</span>
       </div>
-      <div className="demo-command">
-        <span aria-hidden="true">$</span> ansible-playbook demo.yml
+      <div className="demo-intro">
+        <h3>Trois serveurs. Un état attendu.</h3>
+        <p>
+          Objectif : une configuration <strong>v2</strong> et un service{" "}
+          <strong>actif</strong> sur chaque serveur.
+        </p>
       </div>
-      <ol className="demo-steps" aria-label="Étapes de la démonstration">
-        {steps.map((step, index) => {
-          const done = index < progress;
-          const active = running && index === progress;
-          const changed = done && !repeatRun && (index === 1 || index === 2);
-          return (
-            <li
-              key={step}
-              className={active ? "is-running" : done ? "is-done" : ""}
-            >
-              <span className="demo-step-icon" aria-hidden="true">
-                {done ? <Check size={13} /> : <span>{index + 1}</span>}
+      <div className="demo-inventory-heading">
+        <span>ÉTAT ACTUEL</span>
+        <strong>{compliant}/3 conformes</strong>
+      </div>
+      <ul className="demo-hosts" aria-label="État des serveurs simulés">
+        {state.hosts.map((host) => (
+          <li
+            key={host.name}
+            className={isCompliant(host) ? "is-compliant" : "has-drift"}
+          >
+            <div className="demo-host-name">
+              <Server size={17} aria-hidden="true" />
+              <strong>{host.name}</strong>
+              <span>
+                {isCompliant(host) ? (
+                  <>
+                    <Check size={12} aria-hidden="true" /> Conforme
+                  </>
+                ) : (
+                  "À corriger"
+                )}
               </span>
-              <span>{step}</span>
-              <span
-                className={changed ? "demo-status is-changed" : "demo-status"}
-              >
-                {done ? (changed ? "changed" : "ok") : active ? "…" : "—"}
-              </span>
-            </li>
-          );
-        })}
-      </ol>
+            </div>
+            <dl>
+              <div>
+                <dt>Configuration</dt>
+                <dd className={host.config === "v2" ? "" : "has-drift"}>
+                  {host.config}
+                </dd>
+              </div>
+              <div>
+                <dt>Service</dt>
+                <dd className={host.service ? "" : "has-drift"}>
+                  {host.service ? "Actif" : "Arrêté"}
+                </dd>
+              </div>
+            </dl>
+          </li>
+        ))}
+      </ul>
+      <div className="demo-actions">
+        <button
+          className="button button-primary"
+          onClick={() => dispatch({ type: "apply" })}
+        >
+          <Play size={15} aria-hidden="true" />
+          {compliant === 3 ? "Relancer le playbook" : "Appliquer le playbook"}
+        </button>
+        <button
+          className="demo-secondary"
+          onClick={() => dispatch({ type: "check" })}
+        >
+          <Eye size={15} aria-hidden="true" /> Prévisualiser
+        </button>
+      </div>
       <div
-        className="demo-result"
+        className="demo-feedback"
         role="status"
         aria-live="polite"
         aria-atomic="true"
       >
-        {complete
-          ? repeatRun
-            ? "Déjà conforme. Aucun changement nécessaire."
-            : "Configuration appliquée. Relancez pour comparer !"
-          : running
-            ? "Le scénario se déroule…"
-            : "Une commande, plusieurs étapes. À vous de jouer."}
-      </div>
-      <div className="demo-actions">
-        <button
-          className="button button-primary"
-          onClick={launch}
-          disabled={running || !ready}
-        >
-          {configured ? <RotateCcw size={15} /> : <Play size={15} />}
-          {running
-            ? "Exécution en cours…"
-            : configured
-              ? "Relancer la démo"
-              : "Lancer la démo"}
-        </button>
-        {configured && !running && (
-          <button
-            className="demo-reset"
-            onClick={() => {
-              setProgress(0);
-              setConfigured(false);
-              setRepeatRun(false);
-            }}
+        <div className="demo-feedback-label">
+          {report ? (
+            <>
+              <span>
+                {report.mode === "check" ? "APERÇU" : "EXÉCUTION"} #{report.run}
+              </span>
+              <strong>
+                {report.changes.length}{" "}
+                {report.mode === "check"
+                  ? "à corriger"
+                  : "changement" + (report.changes.length > 1 ? "s" : "")}
+              </strong>
+            </>
+          ) : (
+            <span>À VOUS DE JOUER</span>
+          )}
+        </div>
+        <p>{state.notice}</p>
+        {report && report.changes.length > 0 && (
+          <ul
+            className="demo-diff"
+            aria-label={
+              report.mode === "check"
+                ? "Corrections prévues"
+                : "Corrections appliquées"
+            }
           >
-            Réinitialiser
-          </button>
+            {report.changes.map((change) => (
+              <li key={`${change.host}-${change.field}`}>
+                <span>
+                  <b>{change.host}</b> · {change.field}
+                </span>
+                <span>
+                  <del>{change.before}</del>
+                  <ArrowRight size={12} aria-hidden="true" />
+                  <span className="sr-only"> vers </span>
+                  <ins>{change.after}</ins>
+                </span>
+              </li>
+            ))}
+          </ul>
         )}
       </div>
-      <p className="demo-note">Simulation pédagogique dans votre navigateur.</p>
+      <div className="demo-scenarios">
+        <button
+          className="demo-secondary"
+          disabled={!canStopService}
+          onClick={() => dispatch({ type: "stop-service" })}
+        >
+          <Power size={14} aria-hidden="true" /> Arrêter le service sur app-02
+        </button>
+        <button
+          className="demo-reset"
+          onClick={() => dispatch({ type: "reset" })}
+        >
+          <RotateCcw size={13} aria-hidden="true" /> Recommencer
+        </button>
+      </div>
+      <p className="demo-note">
+        Scénario fictif et local, indépendant du projet Thales.{" "}
+        <a
+          href="https://docs.ansible.com/projects/ansible/latest/playbook_guide/playbooks_checkmode.html"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Comprendre le mode check
+          <span className="sr-only"> — nouvel onglet</span> ↗
+        </a>
+      </p>
     </div>
   );
 }

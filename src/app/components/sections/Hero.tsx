@@ -317,8 +317,10 @@ export default function Hero() {
             <Code2 size={22} />
           </span>
           <span>
-            <strong>Pourquoi relancer un playbook ne change pas tout ?</strong>
-            <small>Explorer l’idempotence avec une simulation Ansible.</small>
+            <strong>Remettre trois serveurs en conformité.</strong>
+            <small>
+              Prévisualiser, appliquer, puis simuler un service arrêté.
+            </small>
           </span>
           <span className="lab-toggle-action">
             {labOpen ? "FERMER" : "OUVRIR LE LAB"}
@@ -327,19 +329,6 @@ export default function Hero() {
         </button>
         {labOpen && (
           <div id="ansible-lab" className="lab-content">
-            <div>
-              <p className="eyebrow">ANSIBLE / IDEMPOTENCE</p>
-              <h3>
-                Un état attendu.
-                <br />
-                Seulement les changements nécessaires.
-              </h3>
-              <p>
-                Au premier passage, la configuration est appliquée. À la
-                relance, le système est déjà conforme : aucune modification
-                supplémentaire.
-              </p>
-            </div>
             <AnsibleDemo />
           </div>
         )}

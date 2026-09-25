@@ -971,42 +971,29 @@ svg {
   transform: rotate(180deg);
 }
 .lab-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 60px;
   border-top: 1px solid var(--line);
-  padding: 35px;
-}
-.lab-content > div:first-child {
-  padding: 15px 0;
-}
-.lab-content h3 {
-  font-size: 24px;
-  line-height: 1.35;
-  letter-spacing: -0.025em;
-  font-weight: 450;
-  margin-top: 20px;
-}
-.lab-content > div:first-child > p:not(.eyebrow) {
-  font-size: 12px;
-  color: var(--muted);
-  line-height: 1.9;
-  margin-top: 20px;
-  max-width: 340px;
+  padding: 28px;
 }
 .ansible-demo {
+  min-width: 0;
   padding: 24px;
   border: 1px solid #34454f;
   border-radius: 3px;
   background: #0c1216;
   color: #d4dfe7;
 }
+.lab-content .ansible-demo {
+  border: 0;
+  padding: 0;
+  background: transparent;
+}
 .demo-header {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
   gap: 9px;
-  font: 9px var(--font-mono);
-  color: #91a6b4;
+  font: 9px/1.6 var(--font-mono);
+  color: #a1b4c1;
 }
 .demo-header > svg {
   color: var(--accent);
@@ -1015,85 +1002,244 @@ svg {
   margin-left: auto;
   border: 1px solid #3b505e;
   padding: 4px 7px;
-  font-size: 7px;
+  font-size: 8px;
 }
-.demo-command {
-  font: 12px var(--font-mono);
-  border-bottom: 1px solid var(--line);
-  padding-block: 24px 20px;
+.ansible-demo .demo-intro h3 {
+  margin-top: 20px;
+  font-size: 22px;
+  font-weight: 450;
+  line-height: 1.35;
+  letter-spacing: -0.025em;
 }
-.demo-command > span {
-  color: var(--accent);
-  margin-right: 10px;
+.demo-intro p {
+  margin-top: 9px;
+  color: #a9bdca;
+  font-size: 12px;
+  line-height: 1.8;
 }
-.demo-steps {
-  padding: 15px 0;
+.demo-intro strong {
+  color: #e1e9ed;
+  font-weight: 500;
+}
+.demo-inventory-heading {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 25px 0 10px;
+  font: 9px/1.5 var(--font-mono);
+  color: #a1b4c1;
+}
+.demo-inventory-heading strong {
+  color: #d4dfe7;
+  font-weight: 500;
+}
+.demo-hosts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 150px), 1fr));
+  gap: 10px;
   list-style: none;
   margin: 0;
+  padding: 0;
 }
-.demo-steps li {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  padding-block: 10px;
-  font-size: 11px;
-}
-.demo-step-icon {
-  display: grid;
-  place-items: center;
-  width: 20px;
-  height: 20px;
-  border: 1px solid #405463;
-  font: 8px var(--font-mono);
+.demo-hosts > li {
+  min-width: 0;
+  padding: 14px;
+  border: 1px solid #61433e;
+  background: #201b1b;
   border-radius: 3px;
+  transition:
+    background-color 180ms ease,
+    border-color 180ms ease;
 }
-.demo-steps .is-done .demo-step-icon {
-  background: #233f35;
-  color: #acd2ba;
-  border-color: #547c64;
+.demo-hosts > li.is-compliant {
+  border-color: #365649;
+  background: #15241f;
 }
-.demo-steps .is-running .demo-step-icon {
-  background: var(--accent);
-  color: var(--ink);
+.demo-host-name {
+  display: flex;
+  gap: 7px;
+  flex-wrap: wrap;
+  align-items: center;
+  font: 11px/1.5 var(--font-mono);
 }
-.demo-status {
-  margin-left: auto;
-  font: 9px var(--font-mono);
-  color: #9cb6a8;
-}
-.demo-status.is-changed {
-  color: #ff9d91;
-}
-.demo-result {
-  font-size: 11px;
-  line-height: 1.7;
-  min-height: 34px;
-  padding-top: 4px;
-  color: #a9bdca;
-}
-.demo-actions {
+.demo-host-name > span {
   display: flex;
   align-items: center;
-  gap: 15px;
-  margin-top: 15px;
+  gap: 4px;
+  width: 100%;
+  color: #ffb0a5;
+  font:
+    10px/1.5 var(--font-geist),
+    sans-serif;
+}
+.is-compliant .demo-host-name > span {
+  color: #a9d6bc;
+}
+.demo-hosts dl {
+  margin-top: 14px;
+  font-size: 11px;
+}
+.demo-hosts dl > div {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 6px;
+}
+.demo-hosts dt {
+  color: #a8b7c0;
+}
+.demo-hosts dd {
+  color: #b4dcc3;
+  font-weight: 500;
+}
+.demo-hosts dd.has-drift {
+  color: #ffb0a5;
+}
+.demo-actions,
+.demo-scenarios {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 18px;
+  margin-top: 20px;
 }
 .demo-actions .button {
   padding: 12px 15px;
-  font-size: 10px;
-  gap: 12px;
-  min-height: 41px;
+  font-size: 11px;
+  gap: 9px;
+  min-height: 44px;
 }
-.demo-actions .button:disabled {
-  opacity: 0.65;
+.demo-secondary,
+.demo-reset {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 11px;
+  min-height: 44px;
+  text-align: left;
+}
+.demo-secondary {
+  color: #d4dfe7;
+}
+.demo-secondary:hover,
+.demo-reset:hover {
+  color: var(--accent);
+}
+.demo-secondary:disabled {
+  color: #8798a4;
+  opacity: 0.7;
+  cursor: default;
 }
 .demo-reset {
-  font-size: 10px;
   text-decoration: underline;
+  color: #a9bdca;
+  margin-left: auto;
+}
+.demo-feedback {
+  margin-top: 18px;
+  padding: 16px;
+  border-left: 2px solid var(--accent);
+  background: #171f25;
+}
+.demo-feedback-label {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+  font: 9px/1.5 var(--font-mono);
+  color: #d4dfe7;
+}
+.demo-feedback-label strong {
+  color: #ffb0a5;
+  font-weight: 500;
+}
+.demo-feedback > p {
+  font-size: 12px;
+  line-height: 1.7;
+  margin-top: 8px;
+  color: #c3d0d8;
+}
+.demo-diff {
+  list-style: none;
+  padding: 0;
+  margin-top: 12px;
+}
+.demo-diff li {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 4px 15px;
+  padding-block: 8px;
+  border-top: 1px solid #334149;
+  font-size: 11px;
+}
+.demo-diff li > span:last-child {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.demo-diff b {
+  font: 10px var(--font-mono);
+}
+.demo-diff del {
+  color: #d4a29c;
+}
+.demo-diff ins {
+  color: #b4dcc3;
+  text-decoration: none;
+}
+.demo-scenarios {
+  border-top: 1px solid var(--line);
+  padding-top: 8px;
+  margin-top: 16px;
 }
 .demo-note {
-  font: 8px var(--font-mono);
-  color: #718d9f;
-  margin-top: 20px;
+  font-size: 10px;
+  color: #95abb9;
+  line-height: 1.7;
+  margin-top: 12px;
+}
+.demo-note a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+@media (max-width: 700px) {
+  .lab-content {
+    padding: 20px 16px;
+  }
+  .demo-pill {
+    margin-left: 0;
+  }
+  .ansible-demo .demo-intro h3 {
+    font-size: 20px;
+  }
+  .demo-hosts {
+    grid-template-columns: 1fr;
+  }
+  .demo-host-name > span {
+    width: auto;
+    margin-left: auto;
+  }
+  .demo-hosts dl {
+    margin-top: 9px;
+  }
+  .demo-hosts dl > div {
+    margin-top: 4px;
+  }
+  .demo-actions {
+    gap: 7px 13px;
+  }
+  .demo-actions .button {
+    font-size: 11px;
+  }
+  .demo-feedback {
+    padding: 13px;
+  }
+  .demo-reset {
+    margin-left: 0;
+  }
 }
 .career-row {
   display: grid;
@@ -1856,21 +2002,8 @@ svg {
     font-size: 7px;
     gap: 8px;
   }
-  .lab-content {
-    gap: 30px;
-    padding: 25px;
-  }
-  .lab-content h3 {
-    font-size: 21px;
-  }
   .ansible-demo {
     padding: 20px;
-  }
-  .demo-steps li {
-    font-size: 10px;
-  }
-  .demo-command {
-    font-size: 10px;
   }
   .career-row {
     grid-template-columns: 20px 1fr 1.5fr 20px;
@@ -2376,52 +2509,8 @@ svg {
     margin-left: 44px;
     gap: 10px;
   }
-  .lab-content {
-    grid-template-columns: 1fr;
-    padding: 20px 15px;
-    gap: 22px;
-  }
-  .lab-content > div:first-child {
-    padding: 0 5px;
-  }
-  .lab-content h3 {
-    font-size: 22px;
-    margin-top: 15px;
-  }
-  .lab-content > div:first-child > p:not(.eyebrow) {
-    font-size: 12px;
-    margin-top: 16px;
-  }
   .ansible-demo {
     padding: 19px 15px;
-  }
-  .demo-command {
-    font-size: 10px;
-  }
-  .demo-steps li {
-    font-size: 10px;
-    gap: 7px;
-  }
-  .demo-status {
-    font-size: 8px;
-  }
-  .demo-result {
-    font-size: 10px;
-  }
-  .demo-actions {
-    gap: 12px;
-  }
-  .demo-actions .button {
-    font-size: 10px;
-    padding: 11px 12px;
-    gap: 9px;
-  }
-  .demo-reset {
-    font-size: 9px;
-  }
-  .demo-note {
-    font-size: 7px;
-    line-height: 1.6;
   }
   .career-row {
     grid-template-columns: 22px 1fr 22px;
@@ -2623,25 +2712,6 @@ svg {
   }
   .detail-intro h1 {
     font-size: 10.5vw;
-  }
-  .demo-steps li {
-    font-size: 9px;
-  }
-  .demo-command {
-    font-size: 9px;
-  }
-  .demo-status {
-    font-size: 7px;
-  }
-  .demo-actions {
-    gap: 8px;
-  }
-  .demo-actions .button {
-    font-size: 9px;
-    padding-inline: 10px;
-  }
-  .demo-reset {
-    font-size: 8px;
   }
 }
 @media (prefers-reduced-motion: reduce) {

@@ -16,6 +16,7 @@ Ouvrir http://localhost:3000.
 ```sh
 npm run lint
 npm run typecheck
+npm test
 npm run build
 npm start
 ```
@@ -44,7 +45,7 @@ Les données professionnelles et les chiffres de l’étude de cas proviennent d
 
 La localisation a été mise à jour à Bondoufle à la demande de Yacine. Son expérience Thales et le projet full Ansible reposent sur ses précisions : ingénieur SysOps, gestion de l’infrastructure des contrôleurs aériens, développement dans une équipe de quatre personnes. Aucune date n’a été ajoutée pour Thales, faute d’information. Le lien Why the Blockchain pointe vers `https://whytheblockchain.com/`, vérifié dans le navigateur.
 
-`src/app/data/thales.ts` centralise le contenu Thales. Le mini-lab dans `AnsibleDemo.tsx` est une simulation pédagogique locale, distincte de l’infrastructure réelle : lancement, second passage sans changement et réinitialisation. Il respecte la préférence de réduction des animations. Les études de cas sont accessibles directement via `#case-studies/thales` et `#case-studies/crm`.
+`src/app/data/thales.ts` centralise le contenu Thales. Le mini-lab dans `AnsibleDemo.tsx` est une simulation pédagogique locale, distincte de l’infrastructure réelle : trois serveurs fictifs avec une configuration et un service, aperçu sans modification, application des corrections, relance sans changement, arrêt volontaire d’un service et réinitialisation. Les résultats restent visibles même avec les animations réduites. La logique est isolée dans `src/app/lib/ansible-lab.ts` et vérifiée par `npm test`. Il respecte la préférence de réduction des animations. Les études de cas sont accessibles directement via `#case-studies/thales` et `#case-studies/crm`.
 
 Les six rubriques utilisent des fragments d’URL (`#home`, `#skills`, `#experience`, `#case-studies`, `#education`, `#tech-watch`) et prennent en charge les liens directs et l’historique du navigateur. Le bouton de contact ouvre la messagerie du visiteur.
 
